@@ -1,0 +1,164 @@
+<!-- START Top Navbar-->
+<nav class="navbar topnavbar" role="navigation">
+    <!-- START navbar header-->
+    <div class="navbar-header">
+        <a class="navbar-brand" [routerLink]=" ['/home']" >
+            <div class="brand-logo">
+                <img class="img-responsive" src="assets/img/logo.png" alt="App Logo" />
+              <!--  <h3 class="lableh3">Restaurant</h3> -->
+            </div>
+            <div class="brand-logo-collapsed">
+                <img class="img-responsive" src="assets/img/icon-small.png" alt="App Logo" />
+                <!-- <em class="fa fa-cutlery fa-2x"></em> -->
+            </div>
+        </a>
+    </div>
+    <!-- END navbar header-->
+    <!-- START Nav wrapper-->
+    <div class="nav-wrapper">
+        <!-- START Left navbar-->
+        <ul class="nav navbar-nav">
+            <li>
+                <!-- Button used to collapse the left sidebar. Only visible on tablet and desktops-->
+                <a class="hidden-xs" trigger-resize="" (click)="toggleCollapsedSideabar()" *ngIf="!isCollapsedText()">
+                    <em class="fa fa-navicon"></em>
+                </a>
+                <!-- Button to show/hide the sidebar on mobile. Visible on mobile only.-->
+                <a class="visible-xs sidebar-toggle" (click)="settings.layout.asideToggled =! settings.layout.asideToggled">
+                    <em class="fa fa-navicon"></em>
+                </a>
+            </li>
+            <!-- START User avatar toggle-->
+            <!-- <li>
+                <!-- Button used to collapse the left sidebar. Only visible on tablet and desktops-->
+                <!-- <a (click)="toggleUserBlock($event)">
+                    <em class="icon-user"></em>
+                </a>
+            </li> -->
+            <!-- END User avatar toggle-->
+            <!-- START lock screen-->
+            <!-- <li>
+                <a  title="Lock screen" [routerLink]="'/lock'">
+                    <em class="icon-lock"></em>
+                </a>
+            </li> -->
+            <!-- END lock screen-->
+        </ul>
+        <!-- END Left navbar-->
+        <!-- START Right Navbar-->
+        <ul class="nav navbar-nav navbar-right">
+            <!-- Search icon-->
+            <!-- <li>
+                <a (click)="openNavSearch($event)">
+                    <em class="icon-magnifier"></em>
+                </a>
+            </li> -->
+            <!-- Fullscreen (only desktops)-->
+            <li class="visible-lg">
+                <a #fsbutton (click)="toggleFullScreen($event)">
+                    <em class="fa fa-expand"></em>
+                </a>
+            </li>
+            <!-- START Alert menu-->
+                      <!-- START Alert Notification menu-->
+            <li class="dropdown dropdown-list" dropdown>
+                <a dropdownToggle>
+                   <em class="icon-bell"></em>
+                   <div class="label label-danger">{{notificationData.length}}</div>
+               </a>
+                <!-- START Dropdown menu-->
+                <ul *dropdownMenu class="dropdown-menu animated flipInX">
+                    <li>
+                        <div class="list-group">
+                            <a class="list-group-item">
+                                <div class="media-box">
+                                    
+                                    <div class="media-box-body clearfix" *ngFor="let notify of notificationData">
+                                        <div class="pull-left">
+                                            <em class="fa fa-shopping-bag text-info"></em>
+                                        </div>
+                                        <p class="m0">{{notify.name}}
+                                        <i class="m0 text-muted pull-right">
+                                            <small> 
+                                        <a (click)="goToViewOrderPage(notify.key)"> <em class="fa fa-search"></em></a></small>
+                                        </i>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="list-group-item">
+                                <small>Go To Orders Page</small>
+                                <i class="fa fa-chevron-right pull-right"></i>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+                <!-- END Dropdown menu-->
+            </li>
+
+            <!-- Start Message Notification -->
+          <!-- START Alert menu-->
+            <li class="dropdown dropdown-list" dropdown *ngIf = "countMessage == 1">
+                <a dropdownToggle>
+                  <em class="icon-envelope"></em>
+                  <div class="label label-danger" *ngIf = "countMessage == 1" >1</div>
+                </a>
+                <!-- START Dropdown menu-->
+                <ul *dropdownMenu class="dropdown-menu animated flipInX" >
+                    <li>
+                        <div class="list-group">
+                            <a class="list-group-item">
+                                <div class="media-box">
+                                    <div class="pull-left">
+                                        <em class="fa fa-comment text-warning"></em>
+                                    </div>
+                                    <div class="media-box-body clearfix" >
+                                        <p class="m0">{{userName}}:{{message}}
+                                        <i class="m0 text-muted pull-right">
+                                            <small> 
+                                        <a (click)="goToViewChatPage()"> <em class="fa fa-search"></em></a></small>
+                                        </i>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="list-group-item">
+                                <small>Go To Chat Page</small>
+                                <i class="fa fa-chevron-right pull-right"></i>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+                <!-- END Dropdown menu-->
+            </li>
+         <!-- End Message DropDown -->
+
+
+            <li class="dropdown dropdown-list" dropdown>
+                <a dropdownToggle>
+                    <em class="icon-settings"></em>
+                </a>
+                <!-- START Dropdown menu-->
+                <ul *dropdownMenu class="dropdown-menu animated flipInX">
+                    <li><a (click)="logout()"><i class="fa fa-sign-out" ></i>&nbsp; &nbsp; LogOut</a>
+                    </li>
+                </ul>
+                <!-- END Dropdown menu-->
+            </li>
+            <!-- END Alert menu-->
+            <!-- START Offsidebar button-->
+            <!-- <li>
+                <a (click)="toggleOffsidebar()">
+                    <em class="icon-notebook"></em>
+                </a>
+            </li> -->
+            <!-- END Offsidebar menu-->
+        </ul>
+        <!-- END Right Navbar-->
+    </div>
+    <!-- END Nav wrapper-->
+
+    <app-navsearch [visible]="getNavSearchVisible()" (onclose)="setNavSearchVisible(false)"></app-navsearch>
+
+</nav>
+<!-- END Top Navbar-->

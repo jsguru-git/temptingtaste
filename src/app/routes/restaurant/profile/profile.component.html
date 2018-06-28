@@ -1,0 +1,44 @@
+<div class="container-md">
+    <div class="row">
+    <div class="col-md-2"></div>
+       <div class="col-md-9">
+            <div>
+                <div class="panel b">
+                    <div class="panel-heading bg-purple-dark text-bold ">Profile</div>
+                    <div class="panel-body">
+                        <form role="form" (ngSubmit)="onUpadteUser(f)" #f="ngForm">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input  class="form-control" name="name" id="name" [(ngModel)]="userData.name"  placeholder="Enter Name..." type="text" />
+                            </div>
+                            <div class="form-group">
+                                <label>Street</label>
+                                <input class="form-control" name="street" id="street" [(ngModel)]="userData.street" placeholder="Enter Street..." type="text" />
+                            </div>
+                            <div class="form-group">
+                                <label>City</label>
+                                <input class="form-control" name="city" id="city" [(ngModel)]="userData.city" placeholder="Enter City..." type="text" />
+                            </div>
+                            <div class="form-group">
+                                <label>Zip</label>
+                                <input class="form-control" name="zip" id="zip" [(ngModel)]="userData.zip" placeholder="Enter Zip..." type="text" />
+                            </div>
+                            <div class="form-group">
+                                <label>Country</label>
+                                <input class="form-control" name="country" id="country" [(ngModel)]="userData.country" placeholder="Enter Country..." type="text" />
+                            </div>
+                            <div class="form-group">
+                                <label>Phone</label>
+                                <input class="form-control" name="mobileNo" id="mobileNo" [(ngModel)]="userData.mobileNo" placeholder="Enter Phone Number..." type="text" />
+                            </div>
+                            <button class="btn btn-info" type="submit">Update Profile</button>
+                            <p>
+                                <small class="text-muted"></small>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+       </div>
+    </div>
+</div>

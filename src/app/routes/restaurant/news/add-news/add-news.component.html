@@ -1,0 +1,70 @@
+<div class="content-heading ">
+    Add New News
+    <small><a [routerLink]=" ['/home'] ">Dashboard</a> ->
+           <a [routerLink]="['/news/manageNews']"> Manage News </a>->
+            Add News
+    </small>
+</div>
+<div class="container-md">
+<div class="row">
+<div class="col-md-2"></div>
+<div class="col-md-9">
+                <div class="panel b">
+                    <div class="panel-heading  text-bold bg-purple-dark">Add News</div>
+                    <div class="panel-body">
+                           <form (ngSubmit)="onSubmitNews(f)" #f="ngForm">
+                            <div class="form-group">
+                                <label>Title*</label>
+                                <input class="form-control" type="text" required name="title" id="title" [(ngModel)]="news.title" />
+                            </div>
+                            <div class="form-group">
+                                <label>Author*</label>
+                                <input class="form-control" type="text" required name="author" id="author" [(ngModel)]="news.author" />
+                            </div>
+                            <div class="form-group">
+                                <label>Category*</label>
+                                <input class="form-control" type="text" required name="category" id="category" [(ngModel)]="news.category" />
+                            </div>
+                    
+                            <div class="form-group">
+                                <label>Publish*</label>
+                            <input type="radio" name="publish" value="false" [(ngModel)]="publish"> <span class="myRadio">No</span>
+                            <input type="radio" name="publish" value="true" [(ngModel)]="publish"> Yes
+                           </div>
+                           <div class="form-group">
+                            <label>Send Notification*</label>
+                        <input type="radio" name="notification" value="false" [(ngModel)]="notification"> <span class="myRadio">No</span>
+                        <input type="radio" name="notification" value="true" [(ngModel)]="notification"> Yes
+                       </div>
+                            <div class="form-group">
+                                <label>Short Description*</label>
+                                <textarea class="form-control" rows="2" name="shortDescription" id="shortDescription" required 
+                                [(ngModel)]="news.shortDescription" ></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Description*</label>
+                                <textarea class="form-control" rows="4" name="description" id="description" [(ngModel)]="news.description" required></textarea>
+                            </div>
+                            <div class="row form-group">
+                              <div class="col-md-4">
+                                <div class=" fileUpload btn btn-primary choose-btn">
+                                    <span> <i class="fa fa-upload" aria-hidden="true"></i> &nbsp; Upload</span>
+                                        <input type="file" class="upload" ng2FileSelect [uploader]="uploader" accept="image/*" (change)="readUrl($event)">
+                                </div>
+                              </div>
+                              <div class="col-md-6" [hidden]="url ==''">
+                               <img class="media-object img-thumbnail thumb96" [src]="url" alt="Image" />
+                              </div><!--COL-->
+                            </div>
+
+                          <button class="btn btn-danger pull-right s-n-btn" (click)="cancel()">Cancel</button>
+                          <button class="btn btn-primary pull-right s-n-btn" type="submit">Add News</button>
+                            <p>
+                                <small class="text-muted">* Required Fields</small>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>

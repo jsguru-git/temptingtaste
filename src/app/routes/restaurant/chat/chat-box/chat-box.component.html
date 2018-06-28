@@ -1,0 +1,66 @@
+<div class="col-md-8 col-sm-12 mid-col chat-box">
+
+   <div class="chat-header">
+        <p class="name">{{username}}</p>  
+   </div>
+
+ <div class="message"  #scrollMe  >
+ <span  *ngFor="let data of chatData"    >
+   <!-- msg right side -->
+   	<div class="msg-right row"  *ngIf="data.sendBy == 'User'">
+   	<div class="col-xs-6">
+   	<div class="row" >   	
+   		<!-- img-col -->
+	   	<div class="col col-xs-1" *ngIf = "(imageUrl != null) && (imageUrl != '')">
+        <img src="{{imageUrl}}">
+      </div>
+      <div class="col col-xs-1" *ngIf = " (imageUrl == '') || (imageUrl == null)  ">
+        <img src="assets/img/user/User.png">
+      </div>
+	   	<!-- text-col -->
+	   	<div class="col  col-xs-11">
+	   		<p class="msg">{{data.message}}.</p>
+	   	</div>
+   	</div>	
+        <p class="time">{{data.createdAt | date:'medium'}}</p>
+   	</div> <!-- col-6 width 50% -->
+   	</div> <!-- msg-right- -->
+   	<!-- date -->
+
+
+   	<!-- msg left side -->
+   	<div class="msg-left row"  *ngIf="data.sendBy == 'Admin'">
+   	<div class="col-xs-6 col-xs-offset-6 ">
+   	<div class="row">   	
+	   	<!-- text-col -->
+	   	<div class="col col-xs-11">
+	   		<p class="msg-right">{{data.message}}</p>
+         <p class="time">{{data.createdAt | date:'medium'}}</p>
+	   	</div>
+		<!-- img-col -->
+
+	   	<div class="col col-xs-1"><img src="assets/img/profile/icon-small.png"></div>
+   	</div>
+   	</div> <!-- col-6 offset for 50% woth left side -->	
+   	</div> <!-- msg-left -->
+
+   </span>	
+</div> <!-- message -->
+
+    <div class="row footer">
+      <form #f="ngForm" (ngSubmit)="sendMessage(f)">
+        <div class="col-xs-9">
+
+	       <div class="form-group">
+   			 <textarea type="text" id="message" class="form-control" name="message" placeholder="Type a message" autofocus="" [(ngModel)]=chatMessage.message ></textarea>
+			</div>
+		</div>
+		<div class="col-xs-3 text-right">
+               <button class="btn btn-primary" type="submit" >
+                        Send
+                </button>
+  
+        </div>  
+        </form>   	
+      </div>            
+    </div><!-- col-8 chatbox -->

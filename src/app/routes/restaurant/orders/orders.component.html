@@ -1,0 +1,182 @@
+<div class="content-heading">Orders
+<small><a [routerLink]=" ['/home'] ">Dashboard</a> -> Oders</small>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">Orders Details</div>
+  <div class="table-responsive b0">
+    <table class="table table-hover" *ngIf="role === 'Admin'">
+        <thead>
+            <tr>
+                <th class="text-center">
+                    <strong>#</strong>
+                </th>
+            <th class="text-center">
+                    <strong>Order Id</strong>
+                </th>
+                <th class="text-center">
+                    <strong>Payment Status</strong>
+                </th>
+            <!-- <th class="text-center">
+                    <strong>Name</strong>
+                </th>
+                <th class="text-center">
+                    <strong>Email</strong>
+                </th>
+                <th class="text-center">
+                    <strong>Mobile Number</strong>
+                </th> -->
+                <th class="text-center">
+                    <strong>Order status</strong>
+                </th>
+                <th class="text-center">
+                    <strong>Delivery Method</strong>
+                </th>
+                <th class="text-center">
+                    <strong>Total</strong>
+                </th>
+                <th class="text-center">
+                    <strong>ORDER ACTION</strong>
+                </th>
+                <th class="text-center">
+                    <strong>PAYMENT ACTION</strong>
+                </th>
+                <th class="text-center">
+                    <strong>View</strong>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="text-center" *ngFor="let order of orders;let i = index ">
+                <td>{{i+1}}</td>
+                <td>{{order.orderId}}</td>
+                <!-- <td>{{order.userDetails.name}}</td>
+                <td>{{order.userDetails.email}}</td>
+                <td>{{order.userDetails.mobileNo}}</td> -->
+                <td class="text-center">
+                    <span class="label label-warning" *ngIf="order.paymentStatus=='Pending'">{{order.paymentStatus}}
+                    </span>
+                    <span class="label label-success" *ngIf="order.paymentStatus=='Success'">{{order.paymentStatus}}
+                    </span>
+                </td>
+                <td class="text-center">
+                    <span class="label label-success" *ngIf="order.status=='Delivered'">{{order.status}}
+                    </span>
+                    <span class="label label-process" *ngIf="order.status=='Processing'">{{order.status}}
+                    </span>
+                    <span class="label label-warning" *ngIf="order.status =='Pending'">{{order.status}}</span>
+                    <span class="label label-purple" *ngIf="order.status=='On the way'">{{order.status}}
+                    </span>
+                    <span class="label label-danger" *ngIf="order.status=='Canceled'">{{order.status}}</span>
+                </td>
+                <td>{{order.deliveryOption}}</td>
+                <td>${{order.grandTotal |number:'1.2'}}</td>
+                <td class="text-center">
+                    <select class="input-sm form-control" (change)="OnChangeStatus(order.key,$event,order.userId,order.orderId)" [disabled]="order.status=='Delivered'">
+                        <option>Select Status</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Processing">Processing</option>
+                        <option value="On the way">On the Way</option>
+                        <option value="Ready for pickup">Ready for pickup</option>
+                        <option value="Canceled">Canceled</option>
+                        <option value="Delivered">Delivered</option>
+                    </select>
+                </td>
+                <td class="text-center">
+                    <select class="input-sm form-control" (change)="OnPaymentChangeStatus(order.key,$event,order.userId,order.orderId)" [disabled]="order.paymentStatus=='success'">
+                        <option>Select Status</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Success">Payment Done</option>
+                    </select>
+                </td>
+                <td class="text-center">
+                    <button class="btn btn-sm btn-default" type="button" (click)="ordersShow(order.key)">
+                        <em class="fa fa-search"></em>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+     
+    <!-- For Vendor view -->
+    <table class="table table-hover" *ngIf="role !== 'Admin'">
+        <thead>
+            <tr>
+                <th class="text-center">
+                    <strong>#</strong>
+                </th>
+            <th class="text-center">
+                    <strong>Order Id</strong>
+                </th>
+                <th class="text-center">
+                    <strong>Item Name</strong>
+                </th>
+                <th class="text-center">
+                    <strong>Item Code</strong>
+                </th>
+                <th class="text-center">
+                    <strong>Delivery Method</strong>
+                </th>
+                <th class="text-center">
+                    <strong>Date</strong>
+                </th>
+                <!-- <th class="text-center">
+                    <strong>ORDER ACTION</strong>
+                </th>
+                <th class="text-center">
+                    <strong>PAYMENT ACTION</strong>
+                </th> -->
+                <th class="text-center">
+                    <strong>View</strong>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="text-center" *ngFor="let order of vendorItems;let i = index ">
+                <td>{{i+1}}</td>
+                <td>{{order.orderId}}</td>
+                <!-- <td>{{order.userDetails.name}}</td>
+                <td>{{order.userDetails.email}}</td>
+                <td>{{order.userDetails.mobileNo}}</td> -->
+                <td class="text-center">
+                   {{order.item.title}}
+                </td>
+                <td class="text-center">
+                   {{order.productCode}}
+                </td>
+                <td>{{order.deliveryOption}}</td>
+                <td>{{order.createdAt | date:'dd MMM yyyy' }}</td>
+                <!-- <td>${{order.grandTotal |number:'1.2'}}</td>
+                <td class="text-center">
+                    <select class="input-sm form-control" (change)="OnChangeStatus(order.key,$event,order.userId,order.orderId)" [disabled]="order.status=='Delivered'">
+                        <option>Select Status</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Processing">Processing</option>
+                        <option value="On the way">On the Way</option>
+                        <option value="Ready for pickup">Ready for pickup</option>
+                        <option value="Canceled">Canceled</option>
+                        <option value="Delivered">Delivered</option>
+                    </select>
+                </td>
+                <td class="text-center">
+                    <select class="input-sm form-control" (change)="OnPaymentChangeStatus(order.key,$event,order.userId,order.orderId)" [disabled]="order.paymentStatus=='success'">
+                        <option>Select Status</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Success">Payment Done</option>
+                    </select>
+                </td> -->
+                <td class="text-center">
+                    <button class="btn btn-sm btn-default" type="button" (click)="itemShow(order.key, i)">
+                        <em class="fa fa-search"></em>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="panel-footer">
+        <div class="row">
+        
+        </div>
+    </div>
+</div>

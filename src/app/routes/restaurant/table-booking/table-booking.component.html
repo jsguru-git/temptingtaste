@@ -1,0 +1,98 @@
+<div class="content-heading">Table Booking
+  <small><a [routerLink]=" ['/home'] ">Home</a> -> Table Booking</small>
+</div>
+<div class="waiting-loader" *ngIf="loading == true">
+    <i class="fa fa-5x fa-spin fa-spinner" aria-hidden="true"></i>
+</div>
+<div class="panel panel-default" *ngIf="loading == false">
+  <div class="panel-heading">Booking Details</div>
+  <div class="table-responsive b0">
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <!-- <th class="text-center">
+          <strong>Name</strong>
+        </th>
+        <th class="text-center">
+          <strong>Email</strong>
+        </th> -->
+        <!-- <th class="text-center">
+          <strong>Mobile Number</strong>
+        </th> -->
+        <th class="text-center">
+          <strong>Time Slot</strong>
+        </th>
+        <th class="text-center">
+          <strong>Date</strong>
+        </th>
+        <th class="text-center">
+          <strong>Person</strong>
+        </th>
+        <th class="text-center">
+          <strong>Table No.</strong>
+        </th>
+        <th class="text-center">
+          <strong>status</strong>
+        </th>
+        <!-- <th class="text-center">
+          <strong>Delivery Method</strong>
+        </th>
+        <th class="text-center">
+          <strong>Total</strong>
+        </th> -->
+        <th class="text-center">
+          <strong>ACTION</strong>
+        </th>
+        <th class="text-center">
+          <strong>Assign Table</strong>
+        </th>
+        <th class="text-center">
+          <strong>View</strong>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="text-center" *ngFor="let data of bookingData;let i = index ">
+        <td>{{data.time}}</td>
+        <td>{{data.date}}</td>
+        <td>{{data.person}}</td>
+        <td *ngIf="data.tableNumber">{{data.tableNumber}}</td>
+        <td *ngIf="!data.tableNumber">Not assigned</td>
+        <td class="text-center">
+          <span class="label label-warning" *ngIf="data.status =='Pending'">{{data.status}}
+          </span>
+          <span class="label label-success" *ngIf="data.status =='Approved'">{{data.status}}
+          </span>
+          <span class="label label-danger" *ngIf="data.status=='Cancelled'">{{data.status}}
+          </span>
+        </td>
+        <td class="text-center">
+          <select class="input-sm form-control" (change)="onChangeStatus(i,$event,data.key)">
+            <option>Select Status</option>
+            <option value="Approved">Approved</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+        </td>
+        <td class="text-center">
+          <select class="input-sm form-control" (change)="onAssignTable(i,$event,data.key)" 
+          [disabled]="data.status != 'Approved' " > 
+            <option>Select Table</option>
+            <option *ngFor="let tab of tables" value="{{tab.table}}">{{tab.table}}</option>
+          </select>
+        </td>
+        <td class="text-center">
+          <button class="btn btn-sm btn-default" type="button" (click)="ordersShow(data.key)">
+            <em class="fa fa-search"></em>
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel-footer">
+    <div class="row">
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,115 @@
+<div class="content-heading"> Business User
+    <small><a [routerLink]=" ['/home'] ">Dashboard</a> -> Business User
+    </small>
+</div>
+<!-- START panel-->
+<div class="panel panel-default">
+    <div class="panel-heading">Business Details</div>
+    <div class="panel-body">
+        <form role="form" (ngSubmit)="onSubmitBusiness(f)" #f="ngForm">
+            <fieldset>
+                <label class="col-sm-2 control-label custom">Email</label>
+                <div class="col-sm-10">
+                    <div class="panel">
+                        <div class="panel-body mh0">
+                            <input class="form-control" name="email" id="email" [(ngModel)]="business.email"
+                                   type="Email" placeholder="Enter Email..."/>
+                        </div>
+                    </div>
+                </div>
+
+
+               
+
+
+                <label class="col-sm-2 control-label custom">Description
+                </label>
+                <div class="col-sm-10">
+                    <div class="panel">
+                        <div class="panel-body mh0">
+                            <textarea class="form-control" name="description" id="description"
+                                      [(ngModel)]="business.description" required="" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+
+                <label class="col-sm-2 control-label custom">Address
+                </label>
+                <div class="col-sm-10">
+                    <div class="panel">
+                        <div class="panel-body mh0">
+                            <textarea class="form-control" name="address" id="address" [(ngModel)]="business.address"
+                                      required="" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+
+                <label class="col-sm-2 control-label custom">Facebook Page Link</label>
+                <div class="col-sm-10">
+                    <div class="panel">
+                        <div class="panel-body mh0">
+                            <input class="form-control" name="facebookLink" id="facebookLink"
+                                   [(ngModel)]="business.facebookLink" type="text"
+                                   placeholder="Enter Facebook Link"/>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <label class="col-sm-2 control-label custom">Twitter Page Link</label>
+                <div class="col-sm-10">
+                    <div class="panel">
+                        <div class="panel-body mh0">
+                            <input class="form-control" name="twitterLink" id="twitterLink"
+                                   [(ngModel)]="business.twitterLink" type="text"
+                                   placeholder="Enter Twitter Link"/>
+                        </div>
+                    </div>
+                </div>
+
+
+                <label class="col-sm-2 control-label custom">Office Location</label>
+                <div class="col-sm-10">
+                    <div class="panel">
+                        <div class="panel-body mh0">
+                            <input class="form-control" name="officeLocation" id="officeLocation"
+                                   [(ngModel)]="business.officeLocation" type="text"
+                                   placeholder="Enter Office Location"/>
+                        </div>
+                    </div>
+                </div>
+
+
+                <label class="col-sm-2 control-label custom">Phone Number</label>
+                <div class="col-sm-10">
+                    <div class="panel">
+                        <div class="panel-body mh0">
+                            <input class="form-control" name="phoneNo" id="phoneNo" [(ngModel)]="business.phoneNo"
+                                   type="number" placeholder="Enter Phone Number"/>
+                        </div>
+                    </div>
+                </div>
+
+
+                <label class="col-sm-2 control-label custom">Store Name</label>
+                <div class="col-sm-10">
+                    <div class="panel">
+                        <div class="panel-body mh0">
+                            <input class="form-control" name="storeName" id="storeName"
+                                   [(ngModel)]="business.storeName" type="text"
+                                   placeholder="Enter Store Name"/>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12">
+                    <button class="btn btn-primary pull-right" type="submit">Submit</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

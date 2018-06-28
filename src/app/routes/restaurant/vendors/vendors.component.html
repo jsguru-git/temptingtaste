@@ -1,0 +1,69 @@
+<div class="content-heading">Vendors
+  <div class="pull-right"> 
+              <label class="file-upload">
+                <a [routerLink]="'/vendors/addVendor'">  <button class="btn btn-warning"><em class="fa fa-plus"></em>&nbsp;&nbsp; Add New Vendor</button> </a>  
+              </label>
+   </div><br/><br/>
+  <small><a [routerLink]=" ['/home'] ">Dashboard</a>  ->  Vendors</small>
+  </div>
+  
+  <div class="panel panel-default">
+  <div class="panel-heading">Vendors Details</div>
+    <div class="table-responsive b0 customTable">
+      <table class="table table-striped">
+          <thead>
+          <tr>
+              <th class="thsearch text-center">
+                 Name
+                  <form (keyup)="getVendor(siteName.value)">
+                      <input class="form-control searchinput" type="text" name="siteVal"
+                             id="siteVal" [(ngModel)]="siteVal"
+                             placeholder="Search" #siteName>
+                  </form>
+              </th>
+              <th class="thnosearch text-center">
+                  Edit
+              </th>
+              <th class="thnosearch text-center">
+                  Delete
+              </th>
+               <th class="thnosearch text-center">
+                  View
+              </th>
+              
+              <th class="thnoitem"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class=" text-center" *ngFor="let item of vendors">
+              <td>{{item.title}}</td>
+              <td>
+               <button class="btn btn-sm btn-primary" type="button" (click)="vendorEdit(item.key)"><em class="fa fa-pencil"></em></button>
+               </td>
+               <td>
+                 <button class="btn btn-sm btn-danger" type="button" (click)="vendorDelete(item.key)"><em class="fa fa-trash-o"></em></button>
+              </td>
+              <td>
+               <button class="btn btn-sm btn-default" type="button" (click)="vendorShow(item.key)"><em class="fa fa-search"></em></button>
+              </td>
+              
+          </tr>
+          </tbody>
+          <tfoot>
+          <tr>
+              <td colspan="5" class="customPagination">
+              <!--     <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator> -->
+              </td>
+          </tr>
+          </tfoot>
+      </table>
+  </div>
+  
+  <div class="panel-footer">
+          <div class="row">
+          
+          </div>
+      </div>
+  </div>
+  
+  

@@ -1,0 +1,63 @@
+<div class="content-heading ">
+    Add New Testimonials
+    <small><a [routerLink]=" ['/home'] ">Dashboard</a> ->
+        <a [routerLink]="['/testimonials/manageTestimonials']"> Manage Testimonials </a>->
+        Add Testimonials
+    </small>
+</div>
+<div class="container-md">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-9">
+            <div class="panel b">
+                <div class="panel-heading  text-bold bg-purple-dark">Add Testimonials</div>
+                <div class="panel-body">
+                    <form (ngSubmit)="onSubmitTestimonial(f)" #f="ngForm" >
+                        <div class="form-group">
+                            <label>Name*</label>
+                            <input class="form-control" required placeholder="Your Name" name="name" id="name" [(ngModel)]="testimonial.name"/>
+                        </div>
+                         <div class="form-group">
+                            <label>Company Name*</label>
+                            <input class="form-control" type="text" required name="companyName" id="companyName" [(ngModel)]="testimonial.companyName"/>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Description*</label>
+                            <textarea class="form-control" rows="4" name="message" id="message" [(ngModel)]="testimonial.message"
+                                required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Rating*</label>
+                            <span class="rating">
+                                <rating name="ratingReview" [(ngModel)]="testimonial.rating" [max]="maxRat" 
+                                [readonly]="isReadonly"
+                                stateOn="fa fa-star text-yellow" stateOff="fa fa-star-o">
+                                </rating>
+                            </span>
+                        </div>
+                        <div class="row form-group">
+                        	<div class="col-md-6">
+                                <img src="{{url}}" alt="Image" class="profImg">
+                            </div>
+                           <div class="col-md-6 updateBtn">
+                                <div class=" btn btn-primary choose-btn pull-right">
+                                    <em class="fa fa-upload mr"></em> Upload File
+                                    <input id="image-input" type="file" class="selectBtn" 
+                                    (change)="readerImage($event)" required="" 
+                                    ng2FileSelect [uploader]="uploader" accept="image/*">
+                                     </div>
+                                  </div>
+                            <!--COL-->
+                        </div>
+                        <button class="btn btn-danger pull-right s-n-btn" (click)="cancel()">Cancel</button>
+                        <button class="btn btn-primary pull-right s-n-btn" type="submit" [disabled]="!f.valid" >Add Testimonials</button>
+                        <p>
+                            <small class="text-muted">* Required Fields</small>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

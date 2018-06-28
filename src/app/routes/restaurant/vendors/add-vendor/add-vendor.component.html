@@ -1,0 +1,96 @@
+<div class="content-heading ">
+  Add New Vendor
+  <small><a [routerLink]=" ['/home'] ">Dashboard</a> ->
+      <a [routerLink]="['/vendors/manageVendors']"> Manage Vendors </a>->
+      Add Vender
+  </small>
+</div>
+<div class="container-md">
+  <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-9">
+          <div class="panel b">
+              <div class="panel-heading  text-bold bg-purple-dark">Add Vendor</div>
+              <div class="panel-body">
+                  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+
+
+                      <div class="form-group">
+                          <label>Title*</label>
+                          <input class="form-control" type="text" required name="title" id="title"
+                                 [(ngModel)]="vendor.title"/>
+                      </div>
+                      <div class="form-group">
+                        <label>Vendor Code*</label>
+                        <input class="form-control" type="text" required name="code" id="code"
+                               [(ngModel)]="vendor.code"/>
+                    </div>
+                      <div class="form-group">
+                        <label>Description*</label>
+                        <textarea class="form-control" rows="3" required name="description" id="description"
+                               [(ngModel)]="vendor.description"></textarea>
+                    </div>
+                      <div class="form-group">
+                          <label>Address*</label>
+                          <textarea class="form-control" rows="3" name="address" id="address"
+                                    [(ngModel)]="vendor.address.address" required></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label>City*</label>
+                        <input type="text" class="form-control" rows="1" name="city" id="city"
+                                  [(ngModel)]="vendor.address.city" required />
+                    </div>
+                  <div class="form-group">
+                    <label>Zipcode*</label>
+                    <input type="number" class="form-control" rows="1" name="zipCode" id="zipCode"
+                              [(ngModel)]="vendor.address.zipcode" required />
+                </div>
+                <div class="form-group">
+                    <label>State*</label>
+                    <input type="text" class="form-control" rows="1" name="state" id="state"
+                              [(ngModel)]="vendor.address.state" required />
+                </div>
+                <div class="form-group">
+                    <label>Latitude*</label>
+                    <input type="number" class="form-control" rows="1" name="lat" id="lat"
+                              [(ngModel)]="vendor.address.lat" required />
+                </div>
+                <div class="form-group">
+                <label>Longitude*</label>
+                    <input type="number" class="form-control" rows="1" name="lng" id="lng"
+                              [(ngModel)]="vendor.address.lng" required />
+                </div>
+                <div class="form-group">
+                  <label>Phone*</label>
+                  <input type="number" class="form-control" rows="1" name="phone" id="phone"
+                            [(ngModel)]="vendor.phone" required />
+                </div>
+                <div class="form-group">
+                  <label>Email*</label>
+                  <input type="email" class="form-control" rows="1" name="email" id="email"
+                            [(ngModel)]="vendor.email" required />
+              </div>
+                      <div class="row form-group">
+                          <div class="col-md-4">
+                              <div class=" fileUpload btn btn-primary choose-btn">
+                                  <span> <i class="fa fa-upload" aria-hidden="true"></i> &nbsp; Upload</span>
+                                  <input type="file" class="upload" ng2FileSelect [uploader]="uploader"
+                                         accept="image/*" (change)="readUrl($event)">
+                              </div>
+                          </div>
+                          <div class="col-md-6" [hidden]="url ==''">
+                              <img class="media-object img-thumbnail thumb96" [src]="url" alt="Image"/>
+                          </div><!--COL-->
+                      </div>
+                      <button class="btn btn-danger pull-right s-n-btn" (click)="cancel()">Cancel</button>
+                      <button class="btn btn-primary pull-right s-n-btn" type="submit">Add Vendor</button>
+                      <p>
+                          <small class="text-muted">* Required Fields</small>
+                      </p>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+

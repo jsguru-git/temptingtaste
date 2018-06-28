@@ -1,0 +1,58 @@
+<div class="content-heading ">
+ View Table Booking
+  <small><a [routerLink]=" ['/home'] ">Home -></a>
+    <a [routerLink]="['/tables/booking']">Manage Table Booking  </a>->View Table Booking
+  </small>
+</div>
+   <h4 class="booking">BOOKING INFORMATION</h4> 
+<div class="col-masonry col-md-6 info">
+  <div class="panel b m0">
+    <div class="panel-heading">
+    </div>
+    <div class="panel-body">
+        <div class="container">
+            <div  class="row">
+                    <div class=" col-md-6">
+	                    <div class="row">
+	                      <div class="col-md-4">Time Slot</div>
+	                      <div class="col-md-8">:&nbsp;&nbsp;{{tableDetails.time}}</div>
+	                    </div>
+	                    <div class="row">
+	                      <div class="col-md-4">Booking Date</div>
+	                      <div class="col-md-8">:&nbsp;&nbsp;{{tableDetails.date}}</div>
+	                    </div>
+	                    <div class="row">
+	                      <div class="col-md-4">Person</div>
+	                      <div class="col-md-8">:&nbsp;&nbsp;{{tableDetails.person}}</div>
+	                    </div>
+	                    <div class="row">
+	                      <div class="col-md-4">Table No.</div>
+	                      <div class="col-md-8">:&nbsp;&nbsp;{{tableDetails.tableNumber}}</div>
+	                    </div>
+	                    <div class="row">
+	                      <div class="col-md-4">Status</div>
+	                      <div class="col-md-8">:&nbsp;&nbsp;{{tableDetails.status}}</div>
+	                    </div>
+                    </div>   
+              </div>
+              <h4 class=""><u>Customer Information</u></h4>
+              <div  class="row">
+                    <div class=" col-md-6">
+	                    <div class="row">
+	                      <div class="col-md-4">Name</div>
+	                      <div class="col-md-8">:&nbsp;&nbsp;{{userDetails.name}}</div>
+	                    </div>
+	                    <div class="row">
+	                      <div class="col-md-4">Email</div>
+	                      <div class="col-md-8">:&nbsp;&nbsp;{{userDetails.email}}</div>
+	                    </div>
+	                    <div class="row">
+	                      <div class="col-md-4">mobileNo</div>
+	                      <div class="col-md-8">:&nbsp;&nbsp;{{userDetails.mobileNo}}</div>
+	                    </div>
+	                </div>   
+              </div>
+          </div>
+        </div>
+    </div>
+  

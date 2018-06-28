@@ -1,0 +1,31 @@
+/* custon file upload */
+input[type="file"] {
+    display: block;
+    color: transparent;
+}
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+	}
+	.choose-btn{
+		padding:5px 15px;
+    margin: 0px;
+	}
+    .img-thumbnail {
+    border:0 !important;
+    padding:0;
+    border-radius:0;
+    }
+  .s-n-btn{
+    margin-left: 1.3em;
+  }

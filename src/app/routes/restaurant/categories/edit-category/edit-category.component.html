@@ -1,0 +1,61 @@
+<div class="content-heading ">
+    Update Category
+    <small><a [routerLink]=" ['/home'] ">Dashboard</a> ->
+           <a [routerLink]="['/categories/manageCategories']"> Manage Categories </a>->
+            Update Category
+    </small>
+</div>
+<div class="container-md">
+<div class="row">
+<div class="col-md-2"></div>
+<div class="col-md-9">
+                <div class="panel b">
+                    <div class="panel-heading  text-bold bg-purple-dark">Update Category</div>
+                    <div class="panel-body">
+                       <form (ngSubmit)="onSubmitCategory(f)" #f="ngForm">
+                            <div class="form-group">
+                                    <label>Main Category*</label>
+                            <select class="form-control" name="category" id="category" [(ngModel)]="categoryDetails.mainCategory">
+                                    <option *ngFor="let category of mainCategories" value="{{category.key}}">
+                                        {{category.title}}
+                                    </option>
+                                </select>
+                                </div>
+                            <div class="form-group">
+                                <label>Title*</label>
+                                <input class="form-control" type="text" required name="title" id="title" [(ngModel)]="categoryDetails.title" />
+                            </div>
+                            <div class="form-group">
+                                <label>Description*</label>
+                                <textarea class="form-control" rows="3" name="description" id="description" [(ngModel)]="categoryDetails.description" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Thumb</label>
+                                <label for="image-input" class="file-upload">
+                                <div class="col-md-6" [hidden]="url !=''">
+                                   <img class=" img-responsive img-thumbnail" src="{{categoryDetails.thumb}}" alt="Image" height="70px"/>
+                                 </div>
+                                  <div class="col-md-6" [hidden]="url ==''">
+                                   <img class=" img-responsive img-thumbnail" [src]="url" alt="Image" height="70px"/>
+                                 </div>
+                                  <div class="col-md-6">
+                                    <div class="fileUpload btn btn-primary choose-btn pull-right"><em class="fa fa-upload mr"></em> Choose File</div>
+                                    <input id="image-input" type="file" ng2FileSelect [uploader]="uploader" accept="image/*" (change)="readUrl($event)">
+                                  </div>
+                                  <!--   <div class="col-md-6">
+                                   <img class="media-object img-thumbnail thumb96" [src]="url" alt="Image" />
+                                   </div><!--COL --> 
+                                </label>
+                            </div>
+                              <button class="btn btn-danger pull-right s-n-btn" (click)="cancel()">Cancel</button>
+                               <button class="btn btn-primary pull-right s-n-btn" type="submit">Update Category</button>
+
+                            <p>
+                                <small class="text-muted">* Required Fields</small>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>

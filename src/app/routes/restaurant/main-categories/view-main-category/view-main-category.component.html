@@ -1,0 +1,39 @@
+<div class="content-heading">View Main Category
+  <small><a [routerLink]=" ['/home'] ">Dashboard</a> ->
+         <a [routerLink]="['/mainCategories/manageMainCategories']"> Manage Main Categories </a>->
+             View Main Category 
+  </small>
+  </div>
+ <div class="col-masonry">
+         <div class="panel b m0">
+             <div class="panel-heading">
+             </div>
+             <div class="panel-body">
+                 <div class="row">
+                     <div class="col-lg-4 text-center mb-lg">
+                         <a>
+                             <img class="img-responsive img-thumbnail" src="{{categoryDetails.thumb}}" alt="Image" />
+                         </a>
+                     </div>
+                     <div class="col-lg-8">
+                     <div class="col-lg-3">
+                         <h4 class="media-heading">Name</h4>
+                     </div>
+                     <div class="col-lg-5">
+                         <p>{{categoryDetails.title}}</p>
+                     </div>
+                     </div>
+                     <div class="col-lg-8">
+                     <div class="col-lg-3">
+                         <h4 class="media-heading">Description</h4>
+                     </div>
+                     <div class="col-lg-5">
+                         <p>{{categoryDetails.description}}</p>
+                     </div>
+                     </div>
+                 </div>
+             </div>
+             <div class="panel-body">
+             </div>
+         </div>
+     </div>

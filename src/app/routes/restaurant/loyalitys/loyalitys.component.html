@@ -1,0 +1,32 @@
+<div class="content-heading">Loyalty
+   <small><a [routerLink]=" ['/home'] ">Dashboard</a> -> Setting</small>
+</div>
+<div class="row">
+   <div class="col-sm-6">
+   <!-- START panel-->
+      <div class="panel panel-default">
+         <div class="panel-heading"><strong>Loyalty</strong> Percentage</div>
+         <div class="panel-body">
+            <form role="form" (ngSubmit)="onSubmitLoyality()" #f="ngForm">
+               <div class="form-group">
+
+                  <label>Program Status
+                  </label>
+                  <input class="form-control" type="checkbox" name="enable" id="enable" 
+                  [(ngModel)]="loyalitys.enable" />
+                  <div *ngIf="loyalitys.enable">
+                     <label>Loyalty Percentage
+                     </label>
+                     <input class="form-control" type="text" name="loylityPercentage" id="loylityPercentage" [(ngModel)]="loyalitys.loylityPercentage" placeholder="Enter Loyality Percentage" />
+                     <label>Min Loyalty
+                     </label>
+                     <input class="form-control custom-input" type="text" name="minLoyalityPointes" id="minLoyalityPointes" [(ngModel)]="loyalitys.minLoyalityPointes" placeholder="Enter Minimum loylity Points" />
+                  </div>
+               </div>
+               <button class="btn btn-sm btn-success" type="submit">Save</button>
+            </form>
+         </div>
+      </div>
+      <!-- END panel-->
+   </div>
+</div>

@@ -1,0 +1,40 @@
+@import '../../../shared/styles/app/variables.scss';
+@import '../../../shared/styles/app/media-queries.scss';
+
+.home-container {
+    margin: 0 auto;
+    max-width: $container-md;
+
+    .home-logo {
+        width: 240px;
+    }
+
+    .home-text {
+        @media only screen and (max-width: $mq-tablet) {
+            text-align: center;
+        }
+    }
+    ion-card.myCard.card.card-ios {
+        height: 250px;
+    }
+}
+
+.pieHeight{
+margin-top: 6em;    
+}
+.monthReport {
+    float: left;
+    font-size: 1.4em;
+    padding-right: 20px;
+    padding: 10px 20px 10px 0;
+}
+.yearReport {
+    font-size: 1.4em;
+    padding: 10px 0 10px 0;
+}
+
+.monthBox, .yearBox {
+    border: #ccc;
+    border-style: solid;
+    border-width: 1.5px;
+}

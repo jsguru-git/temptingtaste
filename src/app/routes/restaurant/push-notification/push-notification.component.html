@@ -1,0 +1,40 @@
+<div class="content-heading ">
+  Push Notification
+</div>
+<div class="container-md">
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-9">
+      <div class="panel b">
+        <div class="panel-heading  text-bold bg-purple-dark">Send Notification</div>
+        <div class="panel-body">
+          <form (ngSubmit)="onpushNotification(f)" #f="ngForm">
+            <div class="form-group">
+              <label>Title*</label>
+              <input class="form-control" type="text" required name="title" id="title"
+                     [(ngModel)]="message.headings.en"/>
+            </div>
+            <div class="form-group">
+              <label>Message*</label>
+              <textarea class="form-control" rows="3" name="title" id="title"
+                        [(ngModel)]="message.contents.en" required></textarea>
+            </div>
+            <div class="row">
+              <div class="col-sm-4">
+                <p>
+                <small class="text-muted">* Required Fields</small>
+                </p>                
+              </div>
+              <div class="col-sm-8 text-right">
+                  <button class="btn btn-danger  s-n-btn" (click)="cancel()">Cancel</button>&nbsp;&nbsp;&nbsp;
+                  <button class="btn btn-primary s-n-btn" type="submit">Send</button>
+
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

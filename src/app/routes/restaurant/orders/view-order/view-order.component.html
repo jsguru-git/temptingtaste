@@ -1,0 +1,652 @@
+<div class="content-heading">Orders
+<div class="pull-right">
+    <label for="image-input" class="file-upload" *ngIf="role === 'Admin'">
+      <a><button class="btn btn-warning" (click)="generateInvoice()"><em class="fa fa-print"></em>&nbsp;&nbsp;Print Invoice</button> </a>  
+    </label>
+    <label for="image-input" class="file-upload">
+        <a><button class="btn btn-warning" (click)="createPDF()"><em class="fa fa-print"></em>&nbsp;&nbsp;Print Production Order</button> </a>  
+      </label>
+ </div>
+ <small><a [routerLink]=" ['/home'] ">Dashboard</a> ->
+        <a [routerLink]="['/order/allOrder']"> Orders </a>->
+            Order Detail
+ </small>
+</div>
+<div *ngIf="orderDetails.cart && role === 'Admin'">
+<div class="panel panel-default">
+    <div class="panel-heading">Order Information</div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <p class="lead bb">Details</p>
+                <form class="form-horizontal p-20">
+                    <div class="form-group">
+                        <div class="col-sm-4">Purchased On:</div>
+                        <div class="col-sm-8">
+                            <strong>{{orderDetails.createdAt | date:'medium'}}</strong>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                            <div class="col-sm-4">Order Id:</div>
+                            <div class="col-sm-8">
+                                <strong>{{orderDetails.orderId}}</strong>
+                            </div>
+                        </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">Client Name:</div>
+                        <div class="col-sm-8">
+                            <strong>{{userDetails.name}}</strong>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">Items:</div>
+                        <div class="col-sm-8">
+                            <strong>{{orderDetails.cart.length}}</strong>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">Amount:</div>
+                        <div class="col-sm-8">
+                            <strong>${{orderDetails.grandTotal}}</strong>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">Status</div>
+                        <div class="col-sm-8">
+                     <span class="label label-success" *ngIf="orderDetails.status=='Delivered'">{{orderDetails.status}}
+                    </span>
+                    <span class="label label-process" *ngIf="orderDetails.status=='processing'">{{orderDetails.status}}
+                    </span>
+                    <span class="label label-warning" *ngIf="orderDetails.status =='pending'">{{orderDetails.status}}</span>
+                    <span class="label label-purple" *ngIf="orderDetails.status=='On the Way'">{{orderDetails.status}}
+                    </span>
+                    <span class="label label-danger" *ngIf="orderDetails.status=='Canceled'">{{orderDetails.status}}</span>
+                    </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <p class="lead bb">Client</p>
+                <form class="form-horizontal p-20">
+                    <div class="form-group">
+                        <div class="col-sm-4">Name:</div>
+                        <div class="col-sm-8">
+                            <strong>{{userDetails.name}}</strong>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">Email:</div>
+                        <div class="col-sm-8">
+                            <strong>{{userDetails.email}}</strong>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">Phone:</div>
+                        <div class="col-sm-8">
+                            <strong>{{userDetails.mobileNo}}</strong>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row" *ngIf="pickUp">
+            <div class="col-md-6">
+                <p class="lead bb">Pick-Up Address</p>
+                <form class="form-horizontal p-20">
+                    <div class="form-group">
+                        <div class="col-sm-4">Shop Name</div>
+                        <div class="col-sm-8">
+                            <strong>{{address.name}}</strong>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">Address:</div>
+                        <div class="col-sm-8">
+                            <strong>{{address.address}}</strong>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">City:</div>
+                        <div class="col-sm-8">
+                            <strong>{{address.city}}</strong>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">ZIP/Post Code</div>
+                        <div class="col-sm-8">
+                            <strong>{{address.zipcode}}</strong>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">Phone</div>
+                        <div class="col-sm-8">
+                            <strong>{{address.phone}}</strong>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row" *ngIf="delivery">
+            <div class="col-md-6">
+                <p class="lead bb">Billing Address</p>
+                <form class="form-horizontal p-20">
+                    <div class="form-group">
+                        <div class="col-sm-4">Full Name</div>
+                        <div class="col-sm-8">
+                            <strong>{{address.name}}</strong>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">Address:</div>
+                        <div class="col-sm-8">
+                            <strong>{{address.address}}</strong>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">City:</div>
+                        <div class="col-sm-8">
+                            <strong>{{address.city}}</strong>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">ZIP/Post Code</div>
+                        <div class="col-sm-8">
+                            <strong>{{address.pincode}}</strong>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">Phone</div>
+                        <div class="col-sm-8">
+                            <strong>{{address.mobileNo}}</strong>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <p class="lead bb">Shipping Address</p>
+                <form class="form-horizontal p-20">
+                     <div class="form-group">
+                        <div class="col-sm-4">Full Name</div>
+                        <div class="col-sm-8">
+                            <strong>{{address.name}}</strong>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">Address:</div>
+                        <div class="col-sm-8">
+                            <strong>{{address.address}}</strong>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">City:</div>
+                        <div class="col-sm-8">
+                            <strong>{{address.city}}</strong>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">ZIP/Post Code</div>
+                        <div class="col-sm-8">
+                            <strong>{{address.pincode}}</strong>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">Phone</div>
+                        <div class="col-sm-8">
+                            <strong>{{address.mobileNo}}</strong>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <p class="lead bb">Payment Details</p>
+                <form class="form-horizontal p-20">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="col-sm-4">Total :</div>
+                        <div class="col-sm-8">
+                            <strong>${{orderDetails.subTotal|number:'1.2'}}</strong>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="col-sm-4">Discount/Coupon:</div>
+                        <div class="col-sm-8">
+                            <strong>${{orderDetails.deductedPrice|number:'1.2'}}</strong>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4" *ngIf="orderDetails.usedLoyaltyPoints">
+                    <div class="form-group">
+                        <div class="col-sm-6">Used loyalty Points:</div>
+                        <div class="col-sm-6">
+                            <strong>${{orderDetails.usedLoyaltyPoints|number:'1.2'}}</strong>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="col-sm-2">Tax:</div>
+                        <div class="col-sm-8">
+                            <strong>${{orderDetails.tax|number:'1.2'}}</strong>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="col-sm-4">Pay Amount:</div>
+                        <div class="col-sm-8">
+                            <strong>${{orderDetails.grandTotal|number:'1.2'}}</strong>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="col-sm-5">Payment Status:</div>
+                        <div class="col-sm-7">
+                            <span class="label label-success" *ngIf="orderDetails.paymentStatus =='Success'">{{orderDetails.paymentStatus}}
+                            </span>
+                             <span class="label label-warning" *ngIf="orderDetails.paymentStatus =='Pending'">{{orderDetails.paymentStatus}}
+                             </span>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="col-sm-4">Payment Type:</div>
+                        <div class="col-sm-8">
+                            <strong>{{orderDetails.paymentType}}</strong>
+                        </div>
+                    </div>
+                    </div>
+                </form>
+            </div>
+         </div>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="panel-heading">Products in order</div>
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th class="text-center">#</th>
+                    <th class="text-center">Product Name</th>
+                    <th class="text-center">Price(RM)</th>
+                    <th class="text-center">Extra Option</th>
+                    <th class="text-center">Quantity</th>   
+                    <th class="text-center">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of orderDetails.cart; let i=index ">
+                    <td class="text-center">{{i+1}}</td>
+                    <td class="text-center"> {{data.item.title}}</td>
+                    <td class="text-center">${{data.item.price.value | number:'1.2'}} ({{data.item.price.pname}})</td>
+                    <td class="text-center"><span *ngFor="let item of data.item.extraOptions; let i=index">
+                           {{item.name}}<br>
+                    </span>
+                   </td>
+                    <td class="text-center">{{data.item.itemQunatity}}</td>
+                    <td class="text-center">{{data.itemTotalPrice|number:'1.2'}}</td>
+                </tr>
+                <tr>
+                     <td colspan="4"></td>
+                     <td class="text-right"><strong>Total :</strong></td>
+                     <td class="text-center">${{orderDetails.subTotal|number:'1.2'}}</td>
+                  </tr>
+                  <tr>
+                     <td colspan="4"></td>
+                     <td class="text-right"><strong>Coupon Applied :</strong></td>
+                     <td class="text-center">${{orderDetails.deductedPrice|number:'1.2'}}</td>
+                  </tr>
+                  <tr>
+                     <td colspan="4"></td>
+                     <td class="text-right"><strong>Tax :</strong></td>
+                     <td class="text-center">${{orderDetails.tax|number:'1.2'}}</td>
+                  </tr>  
+                  <tr>
+                        <td colspan="4"></td>
+                        <td class="text-right"><strong>Delivery :</strong></td>
+                        <td class="text-center">${{orderDetails.deliveryCharge|number:'1.2'}}</td>
+                 </tr>  
+                  <tr>
+                     <td colspan="4"></td>
+                     <td class="text-right"><strong>Grand Total :</strong></td>
+                     <td class="text-center">${{orderDetails.grandTotal|number:'1.2'}}</td>
+                  </tr> 
+            </tbody>    
+        </table>
+    </div>
+    <div class="panel-footer">
+        <div class="row ">
+        </div>
+     </div>
+</div>
+</div>
+
+
+<!-- For Vendor View -->
+<div *ngIf="orderDetails.cart && role !== 'Admin'">
+    <div class="panel panel-default">
+        <div class="panel-heading">Item Information</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="lead bb">Details</p>
+                    <form class="form-horizontal p-20">
+                        <div class="form-group">
+                            <div class="col-sm-4">Purchased On:</div>
+                            <div class="col-sm-8">
+                                <strong>{{orderDetails.createdAt | date:'medium'}}</strong>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                                <div class="col-sm-4">Order Id:</div>
+                                <div class="col-sm-8">
+                                    <strong>{{orderDetails.orderId}}</strong>
+                                </div>
+                            </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">Client Name:</div>
+                            <div class="col-sm-8">
+                                <strong>{{userDetails.name}}</strong>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">Items:</div>
+                            <div class="col-sm-8">
+                                <strong>{{orderDetails.cart.length}}</strong>
+                            </div>
+                        </div>
+                        <!-- <div class="form-group">
+                            <div class="col-sm-4">Amount:</div>
+                            <div class="col-sm-8">
+                                <strong>${{orderDetails.grandTotal}}</strong>
+                            </div>
+                        </div> -->
+                        <div class="form-group">
+                            <div class="col-sm-4">Status</div>
+                            <div class="col-sm-8">
+                         <span class="label label-success" *ngIf="orderDetails.status=='Delivered'">{{orderDetails.status}}
+                        </span>
+                        <span class="label label-process" *ngIf="orderDetails.status=='Processing'">{{orderDetails.status}}
+                        </span>
+                        <span class="label label-warning" *ngIf="orderDetails.status =='Pending'">{{orderDetails.status}}</span>
+                        <span class="label label-purple" *ngIf="orderDetails.status=='On the Way'">{{orderDetails.status}}
+                        </span>
+                        <span class="label label-purple" *ngIf="orderDetails.status=='Ready for pickup'">{{orderDetails.status}}
+                            </span>
+                        <span class="label label-danger" *ngIf="orderDetails.status=='Canceled'">{{orderDetails.status}}</span>
+                        </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <p class="lead bb">Client</p>
+                    <form class="form-horizontal p-20">
+                        <div class="form-group">
+                            <div class="col-sm-4">Name:</div>
+                            <div class="col-sm-8">
+                                <strong>{{userDetails.name}}</strong>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">Email:</div>
+                            <div class="col-sm-8">
+                                <strong>{{userDetails.email}}</strong>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">Phone:</div>
+                            <div class="col-sm-8">
+                                <strong>{{userDetails.mobileNo}}</strong>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row" *ngIf="pickUp">
+                <div class="col-md-6">
+                    <p class="lead bb">Pick-Up Address</p>
+                    <form class="form-horizontal p-20">
+                        <div class="form-group">
+                            <div class="col-sm-4">Shop Name</div>
+                            <div class="col-sm-8">
+                                <strong>{{address.name}}</strong>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">Address:</div>
+                            <div class="col-sm-8">
+                                <strong>{{address.address}}</strong>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">City:</div>
+                            <div class="col-sm-8">
+                                <strong>{{address.city}}</strong>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">ZIP/Post Code</div>
+                            <div class="col-sm-8">
+                                <strong>{{address.zipcode}}</strong>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">Phone</div>
+                            <div class="col-sm-8">
+                                <strong>{{address.phone}}</strong>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row" *ngIf="delivery">
+                <!-- <div class="col-md-6">
+                    <p class="lead bb">Delivery Address</p>
+                    <form class="form-horizontal p-20">
+                        <div class="form-group">
+                            <div class="col-sm-4">Full Name</div>
+                            <div class="col-sm-8">
+                                <strong>{{address.name}}</strong>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">Address:</div>
+                            <div class="col-sm-8">
+                                <strong>{{address.address}}</strong>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">City:</div>
+                            <div class="col-sm-8">
+                                <strong>{{address.city}}</strong>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">ZIP/Post Code</div>
+                            <div class="col-sm-8">
+                                <strong>{{address.pincode}}</strong>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">Phone</div>
+                            <div class="col-sm-8">
+                                <strong>{{address.mobileNo}}</strong>
+                            </div>
+                        </div>
+                    </form>
+                </div> -->
+                <div class="col-md-6">
+                    <p class="lead bb">Delivery Address</p>
+                    <form class="form-horizontal p-20">
+                         <div class="form-group">
+                            <div class="col-sm-4">Full Name</div>
+                            <div class="col-sm-8">
+                                <strong>{{address.name}}</strong>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">Address:</div>
+                            <div class="col-sm-8">
+                                <strong>{{address.address}}</strong>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">City:</div>
+                            <div class="col-sm-8">
+                                <strong>{{address.city}}</strong>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">ZIP/Post Code</div>
+                            <div class="col-sm-8">
+                                <strong>{{address.pincode}}</strong>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">Phone</div>
+                            <div class="col-sm-8">
+                                <strong>{{address.mobileNo}}</strong>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    
+            <!-- <div class="row">
+                <div class="col-md-12">
+                    <p class="lead bb">Payment Details</p>
+                    <form class="form-horizontal p-20">
+                      <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="col-sm-4">Total :</div>
+                            <div class="col-sm-8">
+                                <strong>${{orderDetails.subTotal|number:'1.2'}}</strong>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="col-sm-4">Discount/Coupon:</div>
+                            <div class="col-sm-8">
+                                <strong>${{orderDetails.deductedPrice|number:'1.2'}}</strong>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4" *ngIf="orderDetails.usedLoyaltyPoints">
+                        <div class="form-group">
+                            <div class="col-sm-6">Used loyalty Points:</div>
+                            <div class="col-sm-6">
+                                <strong>${{orderDetails.usedLoyaltyPoints|number:'1.2'}}</strong>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="col-sm-2">Tax:</div>
+                            <div class="col-sm-8">
+                                <strong>${{orderDetails.tax|number:'1.2'}}</strong>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="col-sm-4">Pay Amount:</div>
+                            <div class="col-sm-8">
+                                <strong>${{orderDetails.grandTotal|number:'1.2'}}</strong>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="col-sm-5">Payment Status:</div>
+                            <div class="col-sm-7">
+                                <span class="label label-success" *ngIf="orderDetails.paymentStatus =='Success'">{{orderDetails.paymentStatus}}
+                                </span>
+                                 <span class="label label-warning" *ngIf="orderDetails.paymentStatus =='Pending'">{{orderDetails.paymentStatus}}
+                                 </span>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="col-sm-4">Payment Type:</div>
+                            <div class="col-sm-8">
+                                <strong>{{orderDetails.paymentType}}</strong>
+                            </div>
+                        </div>
+                        </div>
+                    </form>
+                </div>
+             </div> -->
+        </div>
+    </div>
+    
+    <div class="panel">
+        <div class="panel-heading">Products in order</div>
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Product Name</th>
+                        <th class="text-center">Special Instruction</th>
+                        <th class="text-center">Extra Option</th>
+                        <th class="text-center">Quantity</th>   
+                        <!-- <th class="text-center">Total</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of orderDetails.cart; let i=index ">
+                        <td class="text-center">{{i+1}}</td>
+                        <td class="text-center"> {{data.item.title}}</td>
+                        <!-- <td class="text-center">${{data.item.price.value | number:'1.2'}} ({{data.item.price.pname}})</td> -->
+                        <td class="text-center"> {{data.item.itemMessage}}</td>
+                        <td class="text-center"><span *ngFor="let item of data.item.extraOptions; let i=index">
+                               {{item.name}}<br>
+                        </span>
+                       </td>
+                        <td class="text-center">{{data.item.itemQunatity}}</td>
+                        <!-- <td class="text-center">{{data.itemTotalPrice|number:'1.2'}}</td> -->
+                    </tr>
+                    <!-- <tr>
+                         <td colspan="4"></td>
+                         <td class="text-right"><strong>Total :</strong></td>
+                         <td class="text-center">${{orderDetails.subTotal|number:'1.2'}}</td>
+                      </tr>
+                      <tr>
+                         <td colspan="4"></td>
+                         <td class="text-right"><strong>Coupon Applied :</strong></td>
+                         <td class="text-center">${{orderDetails.deductedPrice|number:'1.2'}}</td>
+                      </tr>
+                      <tr>
+                         <td colspan="4"></td>
+                         <td class="text-right"><strong>Tax :</strong></td>
+                         <td class="text-center">${{orderDetails.tax|number:'1.2'}}</td>
+                      </tr>  
+                      <tr>
+                            <td colspan="4"></td>
+                            <td class="text-right"><strong>Delivery :</strong></td>
+                            <td class="text-center">${{orderDetails.deliveryCharge|number:'1.2'}}</td>
+                     </tr>  
+                      <tr>
+                         <td colspan="4"></td>
+                         <td class="text-right"><strong>Grand Total :</strong></td>
+                         <td class="text-center">${{orderDetails.grandTotal|number:'1.2'}}</td>
+                      </tr>  -->
+                </tbody>    
+            </table>
+        </div>
+        <div class="panel-footer">
+            <div class="row ">
+            </div>
+         </div>
+    </div>
+    </div>

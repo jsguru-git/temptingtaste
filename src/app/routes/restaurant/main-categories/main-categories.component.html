@@ -1,0 +1,75 @@
+<div class="content-heading">Main Categories
+  <div class="pull-right"> 
+              <label class="file-upload">
+                <a [routerLink]="'/mainCategories/addMainCategory'">  <button class="btn btn-warning"><em class="fa fa-plus"></em>&nbsp;&nbsp; Add New Category</button> </a>  
+              </label>
+   </div><br/><br/>
+  <small><a [routerLink]=" ['/home'] ">Dashboard</a>  ->  Main Categories</small>
+  </div>
+  
+  <div class="panel panel-default">
+  <div class="panel-heading">Main Categories Details</div>
+    <div class="table-responsive b0 customTable">
+      <table class="table table-striped">
+          <thead>
+          <tr>
+              <th class="thsearch text-center">
+                 Name
+                  <form (keyup)="getCategory(siteName.value)">
+                      <input class="form-control searchinput" type="text" name="siteVal"
+                             id="siteVal" [(ngModel)]="siteVal"
+                             placeholder="Search" #siteName>
+                  </form>
+              </th>
+              <th class="thnosearch text-center">
+                  Edit
+              </th>
+              <th class="thnosearch text-center">
+                  Delete
+              </th>
+               <th class="thnosearch text-center">
+                  View
+              </th>
+              <th class="thnosearch text-center">
+                    Add Sub
+                </th>
+              
+              <th class="thnoitem"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class=" text-center" *ngFor="let item of categories">
+              <td>{{item.title}}</td>
+              <td>
+               <button class="btn btn-sm btn-primary" type="button" (click)="categoryEdit(item.key)"><em class="fa fa-pencil"></em></button>
+               </td>
+               <td>
+                 <button class="btn btn-sm btn-danger" type="button" (click)="categoryDelete(item.key)"><em class="fa fa-trash-o"></em></button>
+              </td> 
+              <td>
+               <button class="btn btn-sm btn-default" type="button" (click)="categoryShow(item.key)"><em class="fa fa-search"></em></button>
+              </td>
+              <td>
+                    <button class="btn btn-sm btn-default" type="button" (click)="categoryAdd(item.key)"><em class="fa fa-plus"></em></button>
+                   </td>
+              
+          </tr>
+          </tbody>
+          <tfoot>
+          <tr>
+              <td colspan="5" class="customPagination">
+              <!--     <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator> -->
+              </td>
+          </tr>
+          </tfoot>
+      </table>
+  </div>
+  
+  <div class="panel-footer">
+          <div class="row">
+          
+          </div>
+      </div>
+  </div>
+  
+  

@@ -1,0 +1,76 @@
+<div class="content-heading">News
+<div class="pull-right">
+            <label for="image-input" class="file-upload">
+              <a [routerLink]="'/news/addNews'">  <button class="btn btn-warning"><em class="fa fa-plus"></em>&nbsp;&nbsp; Add New News</button> </a>  
+            </label>
+ </div>
+<small><a [routerLink]=" ['/home'] ">Dashboard</a> -> News</small>
+</div>
+
+<div class="panel panel-default">
+<div class="panel-heading">News Details</div>
+  <div class="table-responsive b0 customTable">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th class="thsearch text-center">
+                Title
+                <form (keyup)="getnews(siteName.value)">
+                    <input class="form-control searchinput" type="text" name="siteVal"
+                           id="siteVal" [(ngModel)]="siteVal"
+                           placeholder="Search" #siteName>
+                </form>
+            </th>
+            <th class="thnosearch text-center">
+                Publish
+            </th>
+             <th class="thnosearch text-center">
+                Edit
+            </th>
+            <th class="thnosearch text-center">
+                Delete
+            </th>
+            <th class="thnosearch text-center">
+                View
+            </th>
+            
+
+            <th class="thnoitem"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="text-center" *ngFor="let item of news">
+            <td>{{item.title}}</td>
+
+             
+            <td>
+                <span class="label label-success" *ngIf="item.publish==true">Yes</span>
+            <span class="label label-warning" *ngIf="!item.publish || item.publish==false ">No</span>
+                </td>
+            <td>
+             <button class="btn btn-sm btn-primary" type="button" (click)="newsEdit(item.key)"><em class="fa fa-pencil"></em></button>
+             </td>
+             <td>
+               <button class="btn btn-sm btn-danger" type="button" (click)="newsDelete(item.key)"><em class="fa fa-trash-o"></em></button>
+            </td>
+            <td>
+             <button class="btn btn-sm btn-default" type="button" (click)="newsShow(item.key)"><em class="fa fa-search"></em></button>
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="5" class="customPagination">
+               <!--  <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator> -->
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+
+<div class="panel-footer">
+        <div class="row">
+        
+        </div>
+    </div>
+</div>

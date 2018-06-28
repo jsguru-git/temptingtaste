@@ -1,0 +1,46 @@
+<div class="content-heading">Tags
+ <div class="pull-right">
+            <label for="image-input" class="file-upload">
+              <a [routerLink]="'/tags/addTags'">  <button class="btn btn-success"><em class="fa fa-plus"></em>&nbsp;&nbsp;Add Tag</button> </a>	
+            </label>
+ </div>
+ <small><a [routerLink]=" ['/home'] ">Dashboard</a> ->
+            Tags
+ </small>
+</div>
+<!-- Zero Configuration-->
+<div class="col-sm-2"></div>
+<div class="col-sm-8">
+<div class="panel panel-default">
+    <div class="panel-heading">Manage Tags</div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table datatable="" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="wd-md text-center custom">Name</th>
+                        <th class="text-center">Update</th>
+                       <th class="text-center">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center" *ngFor="let tag of tags">
+                        <td><a href="">{{tag.tags}}</a>
+                        </td>
+                        <td class="text-center">
+                         <button class="btn btn-sm btn-default" type="button" (click)="tagEdit(tag.key)">
+                         <em class="fa fa-pencil"></em>
+                         </button>
+                        </td>
+                        <td class="text-center">
+                         <button class="btn btn-sm btn-default" type="button" (click)="tagDelete(tag.key)">
+                         <em class="fa fa-trash-o"></em>
+                         </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>

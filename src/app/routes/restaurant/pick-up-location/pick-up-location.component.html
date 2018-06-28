@@ -1,0 +1,87 @@
+<div class="content-heading">Pick-Up Locations
+  <div class="pull-right">
+            <label for="image-input" class="file-upload">
+              <a [routerLink]="'/pickUpLocation/addPickUpLocation'">  <button class="btn btn-warning"><em class="fa fa-plus"></em>&nbsp;&nbsp; Add New Location</button> </a>  
+            </label>
+  </div>
+   <small><a [routerLink]=" ['/home'] ">Dashboard</a> -> Pick-Up Location </small>
+ </div>
+<div class="panel panel-default">
+<div class="panel-heading">Location List</div>
+  <!-- <div class="table-responsive b0">
+<table class="table table-striped">
+        <thead>
+        <tr>
+            <th class="thsearch">
+                Name -->
+                <div class="thsearch">
+                <form (keyup)="getLocation(siteName.value)">
+                    <input class="form-control searchinput" type="text" name="siteVal"
+                           id="siteVal" [(ngModel)]="siteVal" 
+                           placeholder="Search" #siteName>
+                </form>
+                </div>
+                <div *ngFor="let location of locations" class="location">
+                  Name: {{location.name}}<br> 
+                  Address: {{location.address}} {{location.zipcode}}<br>
+                  Phone: {{location.phone}}<br>
+                  <button class="btn btn-sm btn-primary" type="button" (click)="locationEdit(location.key)"><em class="fa fa-pencil"></em></button> 
+                  <button class="btn btn-sm btn-danger" type="button" (click)="locationDelete(location.key)"><em class="fa fa-trash-o"></em></button>
+                </div>
+            <!-- </th>
+            <th class="thnosearch">
+                Offers
+            </th>
+             <th class="thnosearch">
+                Price
+            </th>
+            <th class="thnosearch">
+                View
+            </th>
+            <th class="thnosearch">
+                Edit
+            </th>
+            <th class="thnosearch">
+                Delete
+            </th>
+
+
+            <th class="thnoitem"></th>
+        </tr>
+        </thead>
+        <tbody> -->
+        <!-- <tr *ngFor="let item of menuItems">
+            <td>{{item.title}}</td>
+            <td>
+            <span class="label label-success" *ngIf="item.offer==true">Yes</span>
+            <span class="label label-warning" *ngIf="!item.offer || item.offer==false ">No</span>
+           </td>
+            <td>${{item.price[0].value}}</td>
+            <td>
+            <button class="btn btn-sm btn-default" type="button" (click)="menuItemShow(item.key)"><em class="fa fa-search"></em></button>
+            </td>
+            <td>
+               <button class="btn btn-sm btn-primary" type="button" (click)="menuItemEdit(item.key)"><em class="fa fa-pencil"></em></button> 
+            </td>
+            <td>
+               <button class="btn btn-sm btn-danger" type="button" (click)="menuItemDelete(item.key)"><em class="fa fa-trash-o"></em></button> 
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="5" class="customPagination">
+               <!--  <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator> -->
+            <!-- </td>
+        </tr>
+        </tfoot>
+    </table>
+</div>  -->
+
+<div class="panel-footer">
+        <div class="row">
+        
+        </div>
+    </div>
+</div>
+

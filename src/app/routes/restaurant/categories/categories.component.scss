@@ -1,0 +1,72 @@
+$fa-var-angle-down: "\f107";
+$fa-var-angle-up: "\f106";
+
+// Fix anguarl-datatable sort icons
+.glyphicon-triangle-top:before {
+    content: $fa-var-angle-up !important;
+}
+.glyphicon-triangle-bottom:before {
+    content: $fa-var-angle-down !important;
+}
+$fa-var-angle-down: "\f107";
+$fa-var-angle-up: "\f106";
+
+// Fix anguarl-datatable sort icons
+.glyphicon-triangle-top:before {
+    content: $fa-var-angle-up !important;
+}
+.glyphicon-triangle-bottom:before {
+    content: $fa-var-angle-down !important;
+}
+.customPagination{
+	padding-right: 150px !important;
+}
+.customTable{
+	margin-right: -136px;
+}
+.imageWork{
+	height: 40px;
+    width: 57px;
+}
+.thsearch
+{
+	width: 20%;
+}
+.thnosearch
+{
+	width: 20% !important;
+	padding-bottom: 45px !important;
+}
+.downloadBtn{
+	margin-top: 1em;
+	float: right;
+	margin-right: 1em;
+}
+.thnoitem
+{
+	width: 10%;
+}
+.searchinput :hover{
+	background-color: #ccc !important;
+}
+.searchdate :hover{
+	background-color: #ccc !important;
+}
+
+
+.searchdate-wrapper
+{
+display:flex;
+justify-content:space-between;
+
+.searchdate
+{
+	width:5rem;
+	font-size:11px;
+}
+.searchdate-year
+{
+	width: 7rem;
+	font-size:11px;
+}
+}

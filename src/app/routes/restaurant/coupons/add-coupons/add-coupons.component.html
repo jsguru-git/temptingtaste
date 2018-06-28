@@ -1,0 +1,39 @@
+<div class="content-heading"> Add Coupon
+ <small><a [routerLink]=" ['/home'] ">Dashboard</a> ->
+          <a [routerLink]="['/coupons/all']"> Coupon </a>->
+            New Coupon
+ </small>
+</div>
+<div class="row">
+   <div class="col-sm-2"></div>
+   <div class="col-sm-8">
+   <!-- START panel-->
+      <div class="panel panel-default">
+         <div class="panel-heading"><strong>New</strong> Coupon</div>
+         <div class="panel-body">
+            <form (ngSubmit)="onSubmitTag(f)" #f="ngForm">
+               <div class="form-group">
+                  <label>Coupon Title*</label>
+                  <input class="form-control" type="text" placeholder="Enter Coupon Title" name="coupanName" id="coupanName" [(ngModel)]="coupon.name"/>
+               </div>
+               <div class="form-group">
+                  <label>Coupon Value % *</label>
+                  <input class="form-control" type="number" placeholder="Enter Coupon Value % " name="couponValue" id="couponValue" [(ngModel)]="coupon.value"/>
+               </div>
+               <div class="form-group">
+                  <div class="col-md-10">
+                    <div class="col-md-2"></div>
+                       <div class="col-md-9">
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                        </div>
+                        <div class="col-md-1">
+                        <button class="btn btn-danger pull-right s-n-btn" (click)="cancel()">Cancel</button>
+                    </div>
+                    </div>
+                </div>
+            </form>
+         </div>
+      </div>
+      <!-- END panel-->
+   </div>
+</div>

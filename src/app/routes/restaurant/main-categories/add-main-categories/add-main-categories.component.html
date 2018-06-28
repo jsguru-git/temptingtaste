@@ -1,0 +1,57 @@
+<div class="content-heading ">
+  Add New Category
+  <small><a [routerLink]=" ['/home'] ">Dashboard</a> ->
+      <a [routerLink]="['/mainCategories/manageMainCategories']"> Manage Main Categories </a>->
+      Add Main Category
+  </small>
+</div>
+<div class="container-md">
+  <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-9">
+          <div class="panel b">
+              <div class="panel-heading  text-bold bg-purple-dark">Add Main Category</div>
+              <div class="panel-body">
+                  <form (ngSubmit)="onSubmitCategory(f)" #f="ngForm">
+                      <div class="form-group">
+                          <label>Title*</label>
+                          <input class="form-control" type="text" required name="title" id="title"
+                                 [(ngModel)]="category.title"/>
+                      </div>
+                      <div class="form-group">
+                          <label>Description*</label>
+                          <textarea class="form-control" rows="3" name="title" id="title"
+                                    [(ngModel)]="category.description" required></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label>Has Sub-Category*</label>
+                        <input class="" type="radio" value="false" required name="hasChild" id="hasChild"
+                               [(ngModel)]="hasChild"/><span class="myRadio">No</span>
+                        <input class="" type="radio" value="true" required name="hasChild" id="hasChild"
+                               [(ngModel)]="hasChild"/>Yes
+                    </div>
+
+                      <div class="row form-group">
+                          <div class="col-md-4">
+                              <div class=" fileUpload btn btn-primary choose-btn">
+                                  <span> <i class="fa fa-upload" aria-hidden="true"></i> &nbsp; Upload</span>
+                                  <input type="file" class="upload" ng2FileSelect [uploader]="uploader"
+                                         accept="image/*" (change)="readUrl($event)">
+                              </div>
+                          </div>
+                          <div class="col-md-6" [hidden]="url ==''">
+                              <img class="media-object img-thumbnail thumb96" [src]="url" alt="Image"/>
+                          </div><!--COL-->
+                      </div>
+                      <button class="btn btn-danger pull-right s-n-btn" (click)="cancel()">Cancel</button>
+                      <button class="btn btn-primary pull-right s-n-btn" type="submit">Add Category</button>
+                      <p>
+                          <small class="text-muted">* Required Fields</small>
+                      </p>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+

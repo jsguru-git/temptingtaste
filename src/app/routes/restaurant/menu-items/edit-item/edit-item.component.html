@@ -1,0 +1,273 @@
+<div class="content-heading"> Update Menu Items
+    <small><a [routerLink]=" ['/home'] ">Dashboard</a> ->
+        <a [routerLink]="['/menu/manageItems']"> Menu Items </a>->
+        Update Menu Item
+    </small>
+</div>
+<!-- START panel-->
+<div class="panel panel-default">
+    <div class="panel-heading">Item Details</div>
+    <div class="panel-body">
+        <form (ngSubmit)="onSubmitMainItems(f)" #f="ngForm">
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label custom" for="title">Product Name *</label>
+                    <div class="col-sm-10">
+                        <div class="panel">
+                            <div class="panel-body mh0">
+                                <input class="form-control" name="title" id="title" [(ngModel)]="menuItems.title"
+                                       type="text" required placeholder="Product Name"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label custom" for="productcode">Product Code *</label>
+                    <div class="col-sm-10">
+                        <div class="panel">
+                            <div class="panel-body mh0">
+                                <input class="form-control" name="productcode" id="productcode" [(ngModel)]="menuItems.productCode"
+                                       type="text" required placeholder="Product Code"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label custom">Menu Description
+                    </label>
+                    <div class="col-sm-10">
+                        <div class="panel">
+                            <div class="panel-body mh0">
+                                <textarea class="form-control" name="description" id="description"
+                                          [(ngModel)]="menuItems.description" required="" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label custom">Offer Percentage
+                    </label>
+                    <div class="col-sm-10">
+                        <div class="panel">
+                            <div class="panel-body mh0">
+                                <input class="form-control" type="number" name="offerPercentage" id="offerPercentage"
+                                       [(ngModel)]="menuItems.offerPercentage" required="" rows="3">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label custom">Category</label>
+                    <div class="col-sm-10">
+                        <div class="panel">
+                            <div class="panel-body mh0">
+                                <select class="form-control" name="category" id="category"
+                                        [(ngModel)]="menuItems.category" placeholder="select a category" ng-change="categoryCahnge()">
+                                    <option *ngFor="let category of allCategories" value="{{category.key}}">
+                                        {{category.title}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" *ngIf="role === 'Admin'">
+                    <label class="col-sm-2 control-label custom">Vendor</label>
+                    <div class="col-sm-10">
+                        <div class="panel">
+                            <div class="panel-body mh0">
+                                <select class="form-control" name="vendor" id="vendor"
+                                        [(ngModel)]="menuItems.vendorCode" placeholder="select a vendor" ng-change="vendorChange()">
+                                    <option *ngFor="let vendor of vendors" value="{{vendor.code}}">
+                                        {{vendor.title}}
+                                    </option>
+                                </select> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                <label class="col-sm-2 control-label custom">Featured</label>
+                <div class="col-sm-10">
+                    <div class="panel">
+                        <div class="panel-body mh0">
+                            <input type="radio" name="feature" value="false" [(ngModel)]="feature"> <span class="myRadio">No</span>
+                            <input type="radio" name="feature" value="true" [(ngModel)]="feature"> Yes
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="form-group">
+                <label class="col-sm-2 control-label custom">Available</label>
+                <div class="col-sm-10">
+                    <div class="panel">
+                        <div class="panel-body mh0">
+                            <input type="radio" name="available" value="false" [(ngModel)]="available"> <span class="myRadio">No</span>
+                            <input type="radio" name="available" value="true" [(ngModel)]="available"> Yes
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label custom">Halal</label>
+                    <div class="col-sm-10">
+                        <div class="panel">
+                            <div class="panel-body mh0">
+                                <input type="radio" name="halal" value="false" [(ngModel)]="halal"> <span class="myRadio">No</span>
+                                <input type="radio" name="halal" value="true" [(ngModel)]="halal"> Yes
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label custom">No Pork, No Lard</label>
+                        <div class="col-sm-10">
+                            <div class="panel">
+                                <div class="panel-body mh0">
+                                    <input type="radio" name="noPork" value="false" [(ngModel)]="noPork"> <span class="myRadio">Not Applicable</span>
+                            <input type="radio" name="noPork" value="true" [(ngModel)]="noPork">Applicable
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                <div class="form-group">
+                <label class="col-sm-2 control-label custom">Delivery Lead Time</label>
+                <div class="col-sm-10">
+                    <div class="panel">
+                        <div class="panel-body mh0">
+                            <table>
+                             <tr>   
+                                 <td>
+                                    <input class="form-control" type="number" min="1" max="5" name="leadtimeNum" [(ngModel)]="menuItems.leadtimeNum">
+                                 </td>
+                                 <td>
+                                     <select class="form-control" name="leadtimeUnit" id="" [(ngModel)]="menuItems.leadtimeUnit">
+                                          <option  value="day">
+                                               day
+                                           </option>
+                                           <option  value="hour">
+                                                hour
+                                          </option>
+                                          <option  value="minute">
+                                                minute
+                                            </option>
+                                     </select>
+                                  </td>
+                              </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label custom">Extra Ingredients *</label>
+                    <div class="col-sm-10">
+                        <div class="panel">
+                            <div class="panel-body mh0">
+                                <div class="row">
+                                    <div class="col-md-11 added-block"
+                                         *ngFor="let extra of menuItems.extraOptions; let i = index"
+                                         [attr.data-index]="i">
+                                        <div class="col-md-5">
+                                            <input class="form-control" type="text" name="name-{{i}}" id="name"
+                                                   [(ngModel)]="extra.name" placeholder="Extra Ingredients Name"/>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <input class="form-control" type="text" name="selected-{{i}}" id="selected"
+                                                   [(ngModel)]="extra.value" placeholder="Extra Ingredients Price"/>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <button class="btn btn-danger" type="button" (click)="removeChoice()">
+                                                <em class="fa fa-trash"></em>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <button class="btn btn-sm btn-info plus" type="button" (click)="addNewChoice()">
+                                            <em class="fa fa-plus"></em>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label custom">Price*</label>
+                    <div class="col-sm-10">
+                        <div class="panel">
+                            <div class="panel-body mh0">
+                                <div class="row">
+                                    <div class="col-md-11 added-block"
+                                         *ngFor="let choice of menuItems.price; let i = index" [attr.data-index]="i">
+                                        <div class="col-md-5">
+                                            <input class="form-control" type="text" name="pname-{{i}}" id="pname"
+                                                   [(ngModel)]="choice.pname" placeholder="Product Variance (size)"/>
+                                        </div>
+
+                                        <div class="col-md-5">
+                                            <input class="form-control" type="text" name="value-{{i}}" id="value"
+                                                   [(ngModel)]="choice.value" placeholder="Product Price">
+                                        </div>
+                                        <div class="col-md-1">
+                                            <button class="btn btn-danger" type="button" (click)="removePrice()">
+                                                <em class="fa fa-trash"></em>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <button class="btn btn-sm btn-info plus" type="button" (click)="addNewPrice()">
+                                            <em class="fa fa-plus"></em>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label custom">Menu Image</label>
+                    <div class="col-sm-10">
+                        <div class="panel">
+                            <div class="panel-body mh0">
+                                <label for="image-input" class="file-upload">
+                                    <div [hidden]="url !=''">
+                                        <img class="img-thumbnail img-width" src="{{menuItems.thumb}}" alt="Image"/>
+                                    </div>
+                                    <div [hidden]="url ==''">
+                                        <img class="img-thumbnail img-width" [src]="url" alt="Image"/>
+                                    </div>
+
+                                    <button class="btn btn-primary"><em class="fa fa-upload mr"></em> Choose File
+                                    </button>
+                                    <input id="image-input" type="file" ng2FileSelect [uploader]="uploader"
+                                           accept="image/*" (change)="readUrl($event)">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-danger pull-right s-n-btn" (click)="cancel()">Cancel</button>
+                    <button class="btn btn-primary pull-right s-n-btn" type="submit">Submit</button>
+                </div>
+                <label class="col-sm-2 control-label custom requireField">* field are require</label>
+            </fieldset>
+        </form>
+    </div>
+</div>

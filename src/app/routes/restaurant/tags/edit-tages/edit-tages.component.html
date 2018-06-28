@@ -1,0 +1,28 @@
+<div class="content-heading"> Edit Tags
+ <small><a [routerLink]=" ['/home'] ">Dashboard</a> ->
+          <a [routerLink]="['/tags/all']"> Tags </a>->
+            Update Tag
+ </small>
+</div>
+<div class="row">
+   <div class="col-sm-2"></div>
+   <div class="col-sm-8">
+   <!-- START panel-->
+      <div class="panel panel-default">
+         <div class="panel-heading"><strong>Update</strong> Tag</div>
+         <div class="panel-body">
+                <form (ngSubmit)="onSubmitTag(f)" #f="ngForm">
+               <div class="form-group">
+                  <label>Tag Name*</label>
+                  <input class="form-control" type="text" placeholder="Enter Tag Name" name="tag" id="tag" [(ngModel)]="tagDetails.tags" />
+               </div>
+               <div class="form-group">
+                    <button class="btn btn-info s-n-btn" type="submit">Update</button>
+                    <button class="btn btn-danger pull-right s-n-btn" (click)="cancel()">Cancel</button>
+                </div>
+            </form>
+         </div>
+      </div>
+      <!-- END panel-->
+   </div>
+</div>

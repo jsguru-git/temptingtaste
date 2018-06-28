@@ -1,0 +1,33 @@
+<div class="content-heading">Subscribers
+<!-- <div class="pull-right">
+            <label for="image-input" class="file-upload">
+              <a [routerLink]="'/news/addNews'">  <button class="btn btn-warning"><em class="fa fa-plus"></em>&nbsp;&nbsp; Add New News</button> </a>  
+            </label>
+ </div> -->
+<small><a [routerLink]=" ['/home'] ">Dashboard</a> -> Subscribers</small>
+</div>
+<div class="col-md-2"></div>
+<div class="panel panel-default text-cente col-md-8">
+<div class="panel-heading">Subscribers Details</div>
+  <div class="table-responsive b0 customTable">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th class="">
+                Email
+            </th>
+        </tr>
+        </thead> 
+        <tbody>
+        <tr class="" *ngFor="let item of subscribersData">
+            <td>{{item.subscribe}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="panel-footer">
+        <div class="row">
+        </div>
+    </div>
+</div>

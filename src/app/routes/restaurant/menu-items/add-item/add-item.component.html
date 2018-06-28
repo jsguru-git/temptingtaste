@@ -1,0 +1,374 @@
+<div class="content-heading"> Add Menu Item
+    <small><a [routerLink]=" ['/home'] ">Dashboard</a> ->
+        <a [routerLink]="['/menu/manageItems']"> Menu Items </a>->
+        Add Menu Item
+    </small>
+</div>
+<!-- START panel-->
+<div class="panel panel-default">
+    <div class="panel-heading">Item Details</div>
+    <div class="panel-body">
+        <form (ngSubmit)="onSubmitMainItems(f)" #f="ngForm">
+            <fieldset>
+                <label class="col-sm-2 control-label custom" for="title">Title*</label>
+                <div class="col-sm-10">
+                    <div class="panel">
+                        <div class="panel-body mh0">
+                            <input class="form-control" name="title" id="title"  #title="ngModel" [(ngModel)]="menuItems.title"
+                                   type="text" required placeholder="Menu Item Name"/>
+                                   <!-- <input class="form-control" name="title" id="title" ngModel #title="ngModel"
+                                   type="text" required placeholder="Menu Item Name" [(ngModel)]="menuItems.title" /> -->
+                              <div class="alert alert-danger" *ngIf="title.touched && !title.valid">
+                                  <div *ngIf="title.errors.required">Title Is require</div>
+                              </div>     
+                        </div>
+                    </div>
+                </div>
+
+                <label class="col-sm-2 control-label custom" for="title">Product Code*</label>
+                <div class="col-sm-10">
+                    <div class="panel">
+                        <div class="panel-body mh0">
+                            <input class="form-control" name="productcode" id="productcode" #productcode="ngModel" [(ngModel)]="menuItems.productCode"
+                                   type="text" required placeholder="Menu Item code"/>
+                                   <div class="alert alert-danger" *ngIf="productcode.touched && !productcode.valid">
+                                    <div *ngIf="productcode.errors.required">Product Code is require</div>
+                                </div>  
+                        </div>
+                    </div>
+                </div>
+
+                <label class="col-sm-2 control-label custom">Item Description*
+                </label>
+                <div class="col-sm-10">
+                    <div class="panel">
+                        <div class="panel-body mh0">
+                            <textarea class="form-control" name="description" id="description" #description="ngModel" 
+                                      [(ngModel)]="menuItems.description" required minlength="10" rows="3"></textarea>
+                                      <div class="alert alert-danger" *ngIf="description.touched && !description.valid">
+                                        <div *ngIf="description.errors.required">Description is require</div>
+                                        <div *ngIf="description.errors.minlength">Description must have at least {{description.errors.minlength.requiredLength}} characters</div>
+                                    </div>  
+                        </div>
+                    </div>
+                </div>
+
+                <label class="col-sm-2 control-label custom">Offer Percentage
+                </label>
+                <div class="col-sm-10">
+                    <div class="panel">
+                        <div class="panel-body mh0">
+                            <input class="form-control" type="number" name="offerPercentage" id="offerPercentage"
+                                   [(ngModel)]="menuItems.offerPercentage" required="" rows="3">
+                        </div>
+                    </div>
+                </div>
+
+                <label class="col-sm-2 control-label custom">Category*</label>
+                <div class="col-sm-10">
+                    <div class="panel">
+                        <div class="panel-body mh0">
+                            <select class="form-control" name="category" id="category" #category="ngModel" required [(ngModel)]="menuItems.category">
+                                <option *ngFor="let category of allCategories" value="{{category.key}}">
+                                    {{category.title}}
+                                </option>
+                            </select>
+                            <div class="alert alert-danger" *ngIf="category.touched && !category.valid">
+                                <div *ngIf="category.errors.required">Must select a category</div>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+
+                <label class="col-sm-2 control-label custom" *ngIf="role === 'Admin'">Vendor*</label>
+                <div class="col-sm-10" *ngIf="role === 'Admin'">
+                    <div class="panel">
+                        <div class="panel-body mh0">
+                            <select class="form-control" name="vendorcode" id="vendorcode" #vendorcode="ngModel" required [(ngModel)]="menuItems.vendorCode">
+                                <option *ngFor="let vendor of vendors" value="{{vendor.code}}">
+                                    {{vendor.title}}
+                                </option>
+                            </select>
+                            <div class="alert alert-danger" *ngIf="vendorcode.touched && !vendorcode.valid">
+                                <div *ngIf="vendorcode.errors.required">Must select a vendor</div>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+
+                <label class="col-sm-2 control-label custom">Featured</label>
+                <div class="col-sm-10">
+                    <div class="panel">
+                        <div class="panel-body mh0">
+                            <input type="radio" name="feature" value="false" [(ngModel)]="feature"> <span class="myRadio">No</span>
+                            <input type="radio" name="feature" value="true" [(ngModel)]="feature"> Yes
+                        </div>
+                    </div>
+                </div>
+
+                <label class="col-sm-2 control-label custom">Available</label>
+                <div class="col-sm-10">
+                    <div class="panel">
+                        <div class="panel-body mh0">
+                            <input type="radio" name="available" value="false" [(ngModel)]="available"> <span class="myRadio">No</span>
+                            <input type="radio" name="available" value="true" [(ngModel)]="available"> Yes
+                        </div>
+                    </div>
+                </div>
+                <label class="col-sm-2 control-label custom">Halal</label>
+                <div class="col-sm-10">
+                    <div class="panel">
+                        <div class="panel-body mh0">
+                            <input type="radio" name="halal" value="false" [(ngModel)]="halal"> <span class="myRadio">No</span>
+                            <input type="radio" name="halal" value="true" [(ngModel)]="halal"> Yes
+                        </div>
+                    </div>
+                </div>
+                <label class="col-sm-2 control-label custom">No Pork, No Lard</label>
+                <div class="col-sm-10">
+                    <div class="panel">
+                        <div class="panel-body mh0">
+                            <input type="radio" name="noPork" value="false" [(ngModel)]="noPork"> <span class="myRadio">Not Applicable</span>
+                            <input type="radio" name="noPork" value="true" [(ngModel)]="noPork">Applicable
+                        </div>
+                    </div>
+                </div>
+                <label class="col-sm-2 control-label custom">Delivery Time*</label>
+                <div class="col-sm-10">
+                    <div class="panel">
+                        <div class="panel-body mh0">
+                            <table>
+                             <tr>   
+                                 <td>
+                            <input class="form-control" type="number" min="1" name="leadtimeNum" [(ngModel)]="menuItems.leadtimeNum">
+                              </td>
+                              <td>
+                            <select class="form-control" name="leadtimeUnit" id="" [(ngModel)]="menuItems.leadtimeUnit">
+                                <option  selected value="day">
+                                    day
+                                </option>
+                                <option  value="hour">
+                                    hour
+                                </option>
+                                <option  value="minute">
+                                        minute
+                                    </option>
+                            </select>
+                             </td>
+                            </tr>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+
+                <label class="col-sm-2 control-label custom">Extra Ingredients</label>
+                <div class="col-sm-10">
+                    <div class="panel">
+                        <div class="panel-body mh0">
+                            <div class="row">
+                                <div class="col-md-11 added-block"
+                                     *ngFor="let extra of menuItems.extraOptions; let i = index" [attr.data-index]="i">
+                                    <div class="col-md-5">
+                                        <input class="form-control" type="text" name="name-{{i}}" id="name"
+                                               [(ngModel)]="extra.name" placeholder="Extra Ingredients Name"/>
+                                    </div> 
+                                    <div class="col-md-5">
+                                        <input class="form-control" type="text" name="selected-{{i}}" id="selected"
+                                               [(ngModel)]="extra.selected" placeholder="Extra Ingredients Price"/>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <button class="btn btn-danger" type="button" (click)="removeChoice()">
+                                            <em class="fa fa-trash"></em>
+                                        </button>
+                                    </div>
+                                </div><!--col-->
+                                <div class="col-md-1 added-block">
+                                    <button class="btn btn-sm btn-info" type="button" (click)="addNewChoice()">
+                                        <em class="fa fa-plus"></em>
+                                    </button>
+                                </div>
+                            </div><!--row-->
+
+                        </div>
+                    </div>
+                </div>
+
+                <label class="col-sm-2 control-label custom">Price *</label>
+                <div class="col-sm-10">
+                    <div class="panel">
+                        <div class="panel-body mh0">
+                            <div class="row">
+                                <div class="col-md-11 added-block" *ngFor="let choice of menuItems.price; let i = index"
+                                     [attr.data-index]="i">
+                                    <div class="col-md-5">
+                                        <input class="form-control" type="text" name="pname{{i}}" id="pname" #pname="ngModel" required
+                                               [(ngModel)]="choice.pname" placeholder="Product Variance (size)"/>
+                                    </div>
+                                    <!-- <div class="alert alert-danger" *ngIf="panme.touched && !panme.valid">
+                                        <div *ngIf="panme.errors.required">Size is require</div>
+                                    </div>   -->
+                                    <div class="col-md-5">
+                                        <input class="form-control" type="text" name="value{{i}}" id="value" #value="ngModel" required
+                                               [(ngModel)]="choice.value" placeholder="Product Price">
+                                    </div>
+                                    <!-- <div class="alert alert-danger" *ngIf="value.touched && !value.valid">
+                                        <div *ngIf="value.errors.required">Amount is require</div>
+                                    </div>  -->
+                                    <div class="col-md-1">
+                                        <button class="btn btn-danger" type="button" (click)="removePrice()">
+                                            <em class="fa fa-trash"></em>
+                                        </button>
+                                    </div>
+                                </div><!--col-->
+                                <div class="col-md-1 added-block">
+                                    <button class="btn btn-sm btn-info" type="button" (click)="addNewPrice()">
+                                        <em class="fa fa-plus"></em>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <label class="col-sm-2 control-label custom">Thumb*</label>
+                <div class="col-sm-10">
+                    <div class="row panel">
+                        <div class="col-md-4">
+                            <div class="panel-body mh0 fileUpload btn btn-primary choose-btn">
+                                <span> <i class="fa fa-upload" aria-hidden="true"></i> &nbsp; Upload</span>
+                                <input type="file" class="upload" ng2FileSelect [uploader]="Cuploader" accept="image/*"
+                                       (change)="readUrl($event)">
+                            </div>
+                        </div><!--col-->
+                        <div class="col-md-6" [hidden]="url ==''">
+                            <img class="media-object img-thumbnail thumb96" [src]="url" alt="Image"/>
+                        </div><!--COL-->
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <button class="btn btn-danger pull-right s-n-btn" (click)="cancel()">Cancel</button>
+                    <button class="btn btn-primary pull-right s-n-btn" type="submit">Submit</button>
+                </div>
+                <label class="col-sm-2 control-label custom requireField">* field are require</label>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+<!-- Gallery Images Upload -->
+  <h1>Gallery Images Upload</h1>
+  <style>
+    .my-drop-zone { border: dotted 3px lightgray; }
+    .nv-file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
+    .another-file-over-class { border: dotted 3px green; }
+  
+    html, body { height: 100%; }
+  </style>
+  
+  <div class="container">
+  
+    <div class="row">
+  
+        <div class="col-md-3">
+  
+            <h3>Select files</h3>
+  
+            <div ng2FileDrop
+                 [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+                 (fileOver)="fileOverBase($event)"
+                 [uploader]="uploader"
+                 class="well my-drop-zone">
+                Base drop zone
+            </div>
+  
+            <div ng2FileDrop
+                 [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
+                 (fileOver)="fileOverAnother($event)"
+                 [uploader]="uploader"
+                 class="well my-drop-zone">
+                Another drop zone
+            </div>
+  
+            Multiple
+            <input type="file" ng2FileSelect [uploader]="uploader" multiple  /><br/>
+  
+            Single
+            <input type="file" ng2FileSelect [uploader]="uploader" (onFileSelected)="selected()"/>
+        </div>
+  
+        <div class="col-md-9" style="margin-bottom: 40px">
+  
+            <h3>Upload queue</h3>
+            <p>Queue length: {{ uploader?.queue?.length }}</p>
+  
+            <table class="table">
+                <thead>
+                <tr>
+                    <th width="50%">Name</th>
+                    <th>Size</th>
+                    <th>Progress</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of uploader.queue">
+                    <td><strong>{{ item?.file?.name }}</strong></td>
+                    <td *ngIf="uploader.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+                    <td *ngIf="uploader.isHTML5">
+                        <div class="progress" style="margin-bottom: 0;">
+                            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+                        </div>
+                    </td>
+                    <td class="text-center">
+                        <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                        <span *ngIf="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                        <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                    </td>
+                    <td nowrap>
+                        <button type="button" class="btn btn-success btn-xs"
+                                (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                            <span class="glyphicon glyphicon-upload"></span> Upload
+                        </button>
+                        <button type="button" class="btn btn-warning btn-xs"
+                                (click)="item.cancel()" [disabled]="!item.isUploading">
+                            <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                        </button>
+                        <button type="button" class="btn btn-danger btn-xs"
+                                (click)="item.remove()">
+                            <span class="glyphicon glyphicon-trash"></span> Remove
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+  
+            <div>
+                <div>
+                    Queue progress:
+                    <div class="progress" style="">
+                        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-success btn-s"
+                        (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                    <span class="glyphicon glyphicon-upload"></span> Upload all
+                </button>
+                <button type="button" class="btn btn-warning btn-s"
+                        (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
+                    <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+                </button>
+                <button type="button" class="btn btn-danger btn-s"
+                        (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                    <span class="glyphicon glyphicon-trash"></span> Remove all
+                </button>
+            </div>
+  
+        </div>
+  
+    </div>
+  
+  </div>
+  
+  

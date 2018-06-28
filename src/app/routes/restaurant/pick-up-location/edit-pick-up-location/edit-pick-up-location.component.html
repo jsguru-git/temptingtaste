@@ -1,0 +1,93 @@
+<div class="content-heading"> Update Location
+  <small><a [routerLink]=" ['/home'] ">Dashboard</a> ->
+      <a [routerLink]="['/pickUpLocation/managePickUpLocation']"> Pick-Up Location </a>->
+      Update Pick-Up Location
+  </small>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">Location Details</div>
+  <div class="panel-body">
+      <form (ngSubmit)="onSubmitLocation(f)" #f="ngForm"> 
+          <fieldset>
+              <label class="col-sm-2 control-label custom" for="title">Name*</label>
+              <div class="col-sm-10">
+                  <div class="panel">
+                      <div class="panel-body mh0">
+                          <input class="form-control" name="name" id="name" [(ngModel)]="location.name"
+                                 type="text" required placeholder="Location Name"/>
+                      </div>
+                  </div>
+              </div>
+
+              <label class="col-sm-2 control-label custom">Address
+              </label>
+              <div class="col-sm-10">
+                  <div class="panel">
+                      <div class="panel-body mh0">
+                          <textarea class="form-control" name="address" id="address"
+                                    [(ngModel)]="location.address" required="" rows="3"></textarea>
+                      </div>
+                  </div>
+              </div>
+              <label class="col-sm-2 control-label custom">Area
+            </label>
+            <div class="col-sm-10">
+                <div class="panel">
+                    <div class="panel-body mh0">
+                        <textarea class="form-control" name="area" id="area"
+                                  [(ngModel)]="location.area" required="" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+            <label class="col-sm-2 control-label custom">City
+            </label>
+            <div class="col-sm-10">
+                <div class="panel">
+                    <div class="panel-body mh0">
+                        <textarea class="form-control" name="city" id="city"
+                                  [(ngModel)]="location.city" required="" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+              <label class="col-sm-2 control-label custom">Zip Code
+              </label>
+              <div class="col-sm-10">
+                  <div class="panel">
+                      <div class="panel-body mh0">
+                          <input class="form-control" type="number" name="zipcode" id="zipcode"
+                                 [(ngModel)]="location.pincode" required="" rows="3">
+                      </div>
+                  </div>
+              </div>
+
+              <label class="col-sm-2 control-label custom">Phone
+              </label>
+              <div class="col-sm-10">
+                  <div class="panel">
+                      <div class="panel-body mh0">
+                          <input class="form-control" type="number" name="phone" id="phone"
+                                 [(ngModel)]="location.mobileNo" required="" rows="3"> 
+                      </div>
+                  </div>
+              </div>
+
+              <label class="col-sm-2 control-label custom">Available</label>
+              <div class="col-sm-10">
+                  <div class="panel">
+                      <div class="panel-body mh0">
+                          <input type="radio" name="available" value="false" [(ngModel)]="available"> <span class="myRadio">No</span>
+                          <input type="radio" name="available" value="true" [(ngModel)]="available"> Yes
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-md-12">
+                  <button class="btn btn-danger pull-right s-n-btn" (click)="cancel()">Cancel</button>
+                  <button class="btn btn-primary pull-right s-n-btn" type="submit">Update</button>
+              </div>
+
+          </fieldset>
+      </form>
+  </div>
+</div>

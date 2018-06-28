@@ -1,0 +1,150 @@
+<div *ngIf="activeAddBlock"><!-- Add PIN -->
+	<div class="content-heading"> Add PIN
+	 <small><a [routerLink]=" ['/home'] ">Dashboard</a> ->
+	          <a [routerLink]="['/delivery/options']"> Delivery Options </a>->
+	            Add Delivery Pin 
+	 </small>
+	</div>
+	<div class="row">
+	   <div class="col-sm-2"></div>
+	   <div class="col-sm-8">
+	   <!-- START panel-->
+	      <div class="panel panel-default">
+	         <div class="panel-heading"><strong>Add</strong>Pin Code</div>
+	         <div class="panel-body">
+	            <form (ngSubmit)="onAddPin()" #f="ngForm">
+	               <div class="form-group">
+	                  <label>Pin Code*</label>
+	                  <input class="form-control" type="number" placeholder="Enter PIN Number" name="pin" id="pin" required="" [(ngModel)]="add.pincode"/>
+				   </div>
+				   <div class="form-group">
+						<label>Delivery Charge*</label>
+						<input class="form-control" type="number" placeholder="Enter Amount" name="charge" id="charge" required="" [(ngModel)]="add.deliveryCharge"/>
+					 </div>
+				   <div class="form-group">
+					<label>Available*&nbsp;&nbsp;&nbsp;</label>
+					<input type="radio" name="available" value="false" [(ngModel)]="available"> <span class="myRadio">No</span>
+                            <input type="radio" name="available" value="true" [(ngModel)]="available"> Yes
+				 </div>
+	               <div class="form-group">
+	                  <div class="col-md-10">
+	                    <div class="col-md-2"></div>
+	                       <div class="col-md-9">
+	                        <button class="btn btn-primary" type="submit">Submit</button>
+	                        </div>
+	                        <div class="col-md-1">
+	                        <button class="btn btn-danger pull-right s-n-btn" (click)="cancelAdd()">Cancel</button>
+	                    </div>
+	                    </div>
+	                </div>
+	            </form>
+	         </div>
+	      </div>
+	      <!-- END panel-->
+	   </div>
+	</div>
+</div><!-- Add PIN Close-->
+
+<div *ngIf="activeUpdateBlock"><!-- Update PIN -->
+	<div class="content-heading"> Update PIN
+	 <small><a [routerLink]=" ['/home'] ">Dashboard</a> ->
+	          <a [routerLink]="['/delivery/options']"> Delivery Options </a>->
+	            Update Delivery Pin 
+	 </small>
+	</div>
+	<div class="row">
+	   <div class="col-sm-2"></div>
+	   <div class="col-sm-8">
+	   <!-- START panel-->
+	      <div class="panel panel-default">
+	         <div class="panel-heading"><strong>Update</strong>Pin Code</div>
+	         <div class="panel-body">
+	            <form (ngSubmit)="onUpdatePin()" #f="ngForm">
+	               <div class="form-group">
+	                  <label>Pin Code*</label>
+					  <input class="form-control" type="number" placeholder="Enter PIN Number" name="updatePin" id="pin" required="" [(ngModel)]="update.pincode"/>
+				   </div>
+				   <div class="form-group">
+					<label>Delivery Charge*</label>
+					<input class="form-control" type="number" placeholder="Enter Delivery Charge" name="updateCharge" id="charge" required="" [(ngModel)]="update.deliveryCharge"/>
+				 </div>
+				   <div class="form-group">
+					<label>Available*&nbsp;&nbsp;&nbsp;</label>
+					<input type="radio" name="available" value="false" [(ngModel)]="available"> <span class="myRadio">No</span>
+							<input type="radio" name="available" value="true" [(ngModel)]="available"> Yes
+				 </div>
+	               <div class="form-group">
+	                  <div class="col-md-10">
+	                    <div class="col-md-2"></div>
+	                       <div class="col-md-9">
+	                        <button class="btn btn-primary" type="submit">Update</button>
+	                        </div>
+	                        <div class="col-md-1">
+	                        <button class="btn btn-danger pull-right s-n-btn" (click)="cancelUpdate()">Cancel</button>
+	                    </div>
+	                    </div>
+	                </div>
+	            </form>
+	         </div>
+	      </div>
+	      <!-- END panel-->
+	   </div>
+	</div>
+</div><!-- Update PIN Close-->
+
+<div *ngIf="activeDataTable"> <!-- data Table start-->
+<div class="content-heading">Pin Codes
+ <div class="pull-right">
+            <label for="image-input" class="file-upload">
+              <a>  <button class="btn btn-success" (click)="activeAdd()"><em class="fa fa-plus"></em>&nbsp;&nbsp;Add Pin</button> </a>	
+            </label>
+ </div>
+ <small><a [routerLink]=" ['/home'] ">Dashboard</a> ->
+            Pin Codes
+ </small>
+</div>
+<!-- Zero Configuration-->
+<div class="col-sm-2"></div>
+<div class="col-sm-8">
+<div class="panel panel-default">
+    <div class="panel-heading">Manage Delivery Area</div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table datatable="" class="table table-striped">
+                <thead>
+                    <tr>
+						<th class="wd-md text-center custom">Pin Code</th>
+						<th class="wd-md text-center custom">Available</th>
+                        <th class="text-center">Update</th>
+                       <th class="text-center">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center" *ngFor="let code of allPincodes;let i=index ">
+                        <td><a href="">{{code.pincode}}</a>
+						</td>
+						<td class="text-center available" *ngIf="code.available; else notavailable">
+						  Yes
+						</td>
+						<ng-template #notavailable>
+                            <td class="text-center notavailable">No
+							</td>
+						</ng-template>
+                        <td class="text-center">
+                         <button class="btn btn-sm btn-default" type="button" (click)="activeUpdate(code.key,i)">
+                         <em class="fa fa-pencil"></em> 
+                         </button>
+                        </td>
+                        <td class="text-center">
+                         <button class="btn btn-sm btn-default" type="button" (click)="pinDelete(code.key)">
+                         <em class="fa fa-trash-o"></em>
+                         </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+</div><!-- data Table end-->

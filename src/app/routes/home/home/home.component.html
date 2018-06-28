@@ -1,0 +1,113 @@
+<div class="content-heading">
+    Dashboard
+    <div>{{user.name}}</div>
+</div>
+<!-- START widgets box-->
+<div class="row">
+    <div class="col-lg-3 col-sm-6">
+        <!-- START widget-->
+        <div class="panel widget bg-primary">
+            <div class="row row-table">
+                <div class="col-xs-4 text-center bg-primary-dark pv-lg">
+                    <em class="fa fa-gift fa-3x"></em>
+                </div>
+                <div class="col-xs-8 pv-lg">
+                    <div class="h2 mt0">{{menuItems}}</div>
+                    <div class="text-uppercase">Menu Items</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <!-- START widget-->
+        <div class="panel widget bg-purple">
+            <div class="row row-table">
+                <div class="col-xs-4 text-center bg-purple-dark pv-lg">
+                    <em class="fa fa-list-ol  fa-3x"></em>
+                </div>
+                <div class="col-xs-8 pv-lg">
+                    <div class="h2 mt0">
+                        {{categories}}
+                    </div>
+                    <div class="text-uppercase">Categories</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <!-- START widget-->
+        <div class="panel widget bg-green">
+            <div class="row row-table">
+                <div class="col-xs-4 text-center bg-green-dark pv-lg">
+                    <em class="fa fa-cart-arrow-down fa-3x"></em>
+                </div>
+                <div class="col-xs-8 pv-lg">
+                    <div class="h2 mt0">{{order}}</div>
+                    <div class="text-uppercase">Orders</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="panel widget">
+            <div class="row row-table">
+                <div class="col-xs-4 text-center bg-green pv-lg">
+                    <span now class="text-sm" format="MMMM"></span>
+                    <br/>
+                    <span now class="h2 mt0" format="D"></span>
+                </div>
+                <div class="col-xs-8 pv-lg">
+                    <span now class="text-uppercase" format="dddd"></span>
+                    <br/>
+                    <span now class="h2 mt0" format="h:mm"></span>
+                    <span now class="text-muted text-sm" format="a"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END widgets box-->
+<!-- Chart JS start -->
+<div class="monthReport">Month:
+    <select [(ngModel)]="monthReport" class="monthBox" (change)="monthChanged()">
+        <option selected="selected" value="">Select a month</option>
+        <option value="January">January</option>
+        <option value="February">February</option>
+        <option value="March">March</option>
+        <option value="April">April</option>
+        <option value="May">May</option>
+        <option value="June">June</option>
+        <option value="July">July</option>
+        <option value="August">August</option>
+        <option value="September">September</option>
+        <option value="October">October</option>
+        <option value="November">November</option>
+        <option value="December">December</option>
+    </select>
+</div>
+<div class="yearReport">Year:
+        <select [(ngModel)]="yearReport" class="yearBox" (change)="yearChanged()">
+            <option selected="selected" value="">Select a year</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+        </select>
+    </div>
+<div class="row">
+    <div class="col-lg-8" *ngIf="barData.datasets[0].data.length === y + 1">
+            <!-- <div class="col-lg-8"> -->
+        <h4>Product Sales Report</h4>
+        <div>
+            <canvas baseChart [chartType]="'bar'" [options]="barOptions" [datasets]="barData.datasets"
+                    [colors]="barColors" [labels]="barData.labels" [legend]="false" height="150"></canvas>
+        </div>
+    </div>
+    <!-- Pie Chart End-->
+    <div class="col-lg-4" *ngIf="pieData.datasets[0].data.length <= 10 && pieData.datasets[0].data.length >= 5">
+        <h4>Category Sales Report</h4>
+        <div class="pieHeight">
+            <canvas baseChart [chartType]="'pie'" [options]="pieOptions" [datasets]="pieData.datasets"
+                    [colors]="pieColors" [labels]="pieData.labels" [legend]="false" height="200"></canvas>
+        </div>
+    </div>
+</div>

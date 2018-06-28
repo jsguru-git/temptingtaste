@@ -1,0 +1,62 @@
+<div class="content-heading">Users Detail
+    <div class="pull-right">
+        <label class="file-upload">
+            <a [routerLink]="'/users/addUser'">
+                <button class="btn btn-warning"><em class="fa fa-plus"></em>&nbsp;&nbsp; Add New User</button>
+            </a>
+        </label>
+    </div>
+    <small><a [routerLink]=" ['/home'] ">Dashboard</a> -> Users Detail</small>
+</div>
+<!-- Zero Configuration-->
+<div class="panel panel-default">
+    <div class="panel-heading">All Users Information</div>
+    <div class="panel-body">
+        <div class="table-responsive customTable">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th class="thsearch text-center">
+                        Name
+                    </th>
+                    <th class="thsearch text-center">
+                        Email
+                    </th>
+                    <th class="thsearch text-center">
+                        Mobile Number
+                    </th>
+                    <th class="thnosearch  text-center">
+                        View
+                    </th>
+                    <th class="thnosearch  text-center">
+                        Delete
+                    </th>
+
+                    <th class="thnoitem"></th>
+                </tr>
+                </thead>
+                <tbody *ngFor="let item of users">
+                <tr class=" text-center" *ngIf="item.role != 'Admin'">
+                    <td>{{item.name}}
+                    <td>{{item.email}}</td>
+                    <td>{{item.mobileNo}}</td>
+                    <td>
+                        <button class="btn btn-sm btn-default" type="button" (click)="usersShow(item.key)"><em
+                                class="fa fa-search"></em></button>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-danger" type="button" (click)="usersDelete(item.key)"><em
+                                class="fa fa-trash-o"></em></button>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="5">
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="content-heading ">
+    Add User
+ <small><a [routerLink]=" ['/home'] ">Dashboard</a> ->
+        <a [routerLink]="['/users/manageUsers']"> Users Detail </a>->
+            Add User
+ </small>	
+</div>
+<div class="container-md">
+<div class="row">
+<div class="col-md-1"></div>
+<div class="col-md-10">
+                <div class="panel b">
+                    <div class="panel-heading  text-bold bg-purple-dark">Add User</div>
+                    <div class="panel-body">
+                            <form (ngSubmit)="onAddUsers(f)" #f="ngForm">
+                            <div class="form-group">
+                                <label>First Name*</label>
+                                <input class="form-control" type="text" name="name" id="name" [(ngModel)]="userDetails.name" placeholder="Enter Name..." required />
+                            </div>
+                            <div class="form-group">
+                                <label>Email*</label>
+                                <input class="form-control" name="email" id="email" [(ngModel)]="userDetails.email" type="email" placeholder="Enter Email..." required />
+                            </div>
+                             <div class="form-group">
+                                <label>Password*</label>
+                                <input class="form-control" type="password" name="password" id="password" [(ngModel)]="userDetails.password" placeholder="sEnter Password..." required />
+                            </div>
+                            <div class="form-group">
+                                <label>Mobile Number*</label>
+                                <input class="form-control" name="mobileNo" id="mobileNo" [(ngModel)]="userDetails.mobileNo" type="text" placeholder="Enter Contact Number..." required />
+                            </div>
+                            <div class="form-group">
+                                <label>Role*</label>
+                                <select name="role" [(ngModel)]="userDetails.role" required (change)="roleChange()">
+                                    <option value="User" selected>User</option>
+                                    <option value="Admin">Admin</option>
+                                    <option value="Others">Vendor</option>
+                                </select>
+                                <input class="form-control" name="otherRole" id="otherRole" [(ngModel)]="otherRole" type="text" placeholder="Enter Vendor Code" required  *ngIf="others"/>
+                            </div>
+                            
+                            <button class="btn btn-danger pull-right s-n-btn" (click)="cancel()">Cancel</button>
+
+                            <button class="btn btn-info pull-right" type="submit">Add User</button>
+                            <p>
+                                <small class="text-muted">* Required Fields</small>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>

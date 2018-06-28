@@ -1,0 +1,46 @@
+<div class="content-heading">View Testimonials
+ <small><a [routerLink]=" ['/home'] ">Dashboard</a> ->
+        <a [routerLink]="['/testimonials/manageTestimonials']"> Manage Testimonials </a>->
+            View Testimonials
+ </small>
+ </div>
+<div class="col-masonry">
+        <div class="panel b m0">
+            <div class="panel-heading">
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <a>
+                            <img class="img-responsive img-thumbnail" src="{{testimonial.thumb}}" alt="Image" />
+                        </a>
+                    </div>
+                    <div class="col-md-8">
+                    <div>
+                        <h4 class="media-heading">Name</h4>
+                        <p>{{testimonial.name}}</p>
+                    </div>
+                    <div>
+                        <h4 class="media-heading">Comapany Name</h4>
+                        <p>{{testimonial.companyName}}</p>
+                    </div>
+                    <div> 
+                        <h4 class="media-heading">Ratings</h4>
+                        <rating name="ratingReview" [(ngModel)]="testimonial.rating" 
+                        [max]="maxRat" 
+                        [readonly]="isReadonly"
+                        stateOn="fa fa-star text-yellow" stateOff="fa fa-star-o">
+                        </rating>
+                    </div>
+                    <div>
+                        <h4 class="media-heading">Description</h4>
+                    
+                        <p>{{testimonial.message}}</p>
+                           
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+            </div>
+        </div>
+    </div>
